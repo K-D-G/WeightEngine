@@ -128,7 +128,7 @@ test_file:
 
 commit:
 	git add .
-	git commit -m "$(m)"
+	git commit -m $(m)
 	git push origin master
 
 .PHONY: clean
