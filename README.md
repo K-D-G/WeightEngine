@@ -21,3 +21,12 @@ Features (Already written):
 * GUI system with full text rendering and support for TTF fonts
 * Audio system which includes music and locational sound with abilities for dialogue
 * Utilities to increase the productivity of code writing: time functions, maths, audio and profiling to help improve optimisation speed
+
+Features (To be written):
+* Cross platform support (Android, IOS)
+* Full 3D rendering support
+* Networking functionality for things like multiplayer
+* AI engine
+* Physics engine
+* Cross platform support (PS4, Xbox, Nintendo Switch)
+* Tools (Level editor etc)
