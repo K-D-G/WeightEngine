@@ -1,8 +1,8 @@
-#Notes
+# Notes
 
 * Don't worry can use static lib's with Xcode and IOS just need wrappers https://www.chilkatsoft.com/xcode-link-static-lib.asp
 
-#Plan for Game Engine
+# Plan for Game Engine
 
 * Write for 2D first, mainly focusing on OpenGL for computers->However keeping in mind IOS
 * Premake?
@@ -41,4 +41,4 @@
 * 3D support->Basically repeat above but for 3D system*
 * Testing->Make a game best way
 
-#MAY DO SUPPORT FOR CONSOLES IDK
+# MAY DO SUPPORT FOR CONSOLES IDK
