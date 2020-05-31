@@ -10,23 +10,23 @@
 * Window system ✅
 * Event system ✅
 * Renderer
-  -Batch rendering ✅
-  -QuadData ✅
-    Vertex arrays ✅
-    Vertex buffers ✅
-    Shaders ✅
-    Textures ✅
-    Texture atlas ✅
-    Position stuff->MVP ✅
-  -Camera->Link to MVP ✅
-  -Scenes
-    -Contain entities
-    -Basic lighting? ✅
-  -Particle system ✅
-  -GUI ✅
-    -Widgets ✅
-    -TextRenderer ✅
-  -Cleanup system (delete OpenGL stuff in destructors etc)
+  - Batch rendering ✅
+  - QuadData ✅
+    - Vertex arrays ✅
+    - Vertex buffers ✅
+    - Shaders ✅
+    - Textures ✅
+    - Texture atlas ✅
+    - Position stuff->MVP ✅
+  - Camera->Link to MVP ✅
+  - Scenes
+    - Contain entities
+    - Basic lighting? ✅
+  - Particle system ✅
+  - GUI ✅
+    - Widgets ✅
+    - TextRenderer ✅
+  - Cleanup system (delete OpenGL stuff in destructors etc)
 * Clock->Like kivy
 * Need different compilation things for each platform Windows, mac (can use .dylib's on IOS), linux->probably same as mac
 * Need 2 versions for production and development->this contains logging stuff
@@ -41,4 +41,4 @@
 * 3D support->Basically repeat above but for 3D system*
 * Testing->Make a game best way
 
-# MAY DO SUPPORT FOR CONSOLES IDK
+### MAY DO SUPPORT FOR CONSOLES IDK
