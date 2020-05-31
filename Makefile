@@ -126,6 +126,11 @@ test_file:
 	g++ $(GPPPARAMS) -Lsrc/WeightEngine/external_libraries -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit test_file.cpp -o test_file && ./test_file
 	rm -rf test_file
 
+commit:
+	git add .
+	git commit -m "$(m)"
+	git push origin master
+
 .PHONY: clean
 clean:
 	rm -rf obj libWeightEngine.dylib WeightEngine.a WeightEngineTest/example
