@@ -2,7 +2,7 @@
 #define WEIGHT_ENGINE__UTILS__KEYCODES_H
 #include <WeightEngine/core.h>
 
-#ifdef WEIGHT_USE_GLFW
+#ifdef WEIGHT_DESKTOP
 #include <GLFW/glfw3.h>
 //Type codes
 #define KEY 0

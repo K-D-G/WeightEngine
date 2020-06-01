@@ -13,7 +13,7 @@
 #include <WeightEngine/utils/maths_utils.h>
 #include <WeightEngine/render_engine/gui/gui_renderer.h>
 
-#ifdef WEIGHT_USE_GLFW
+#ifdef WEIGHT_DESKTOP
 #include <GLFW/glfw3.h>
 #endif
 

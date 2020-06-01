@@ -4,7 +4,9 @@
 #define WEIGHT_DEBUG
 
 #if defined(WIN32)||defined(_WIN32)||defined(__WIN32__)||defined(__NT__)
-  #define WEIGHT_USE_GLFW
+  //#define WEIGHT_USE_GLFW
+  #define WEIGHT_DESKTOP
+  #define WEIGHT_SETUP using Application::Application
   #ifdef WEIGHT_BUILD
     #define WEIGHT_API __declspec(dllexport)
   #else
@@ -13,15 +15,21 @@
 #elif defined(__APPLE__)
   #include <TargetConditionals.h>
   #if defined(TARGET_OS_MAC)
-    #define WEIGHT_USE_GLFW
+    //#define WEIGHT_USE_GLFW
+    #define WEIGHT_DESKTOP
+    #define WEIGHT_SETUP using Application::Application
   #elif defined(TARGET_OS_IOS)
     #define WEIGHT_MOBILE
+    #define WEIGHT_IOS
   #endif
 #elif defined(__linux__)
   #if !defined(__ANDROID__)
-    #define WEIGHT_USE_GLFW
+    //#define WEIGHT_USE_GLFW
+    #define WEIGHT_DESKTOP
+    #define WEIGHT_SETUP using Application::Application
   #else
     #define WEIGHT_MOBILE
+    #define WEIGHT_ANDROID
   #endif
 #endif
 

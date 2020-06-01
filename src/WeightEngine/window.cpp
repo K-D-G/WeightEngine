@@ -2,7 +2,7 @@
 
 using namespace Weight;
 
-#ifdef WEIGHT_USE_GLFW
+#ifdef WEIGHT_DESKTOP
 Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system):_title(title), _width(width), _height(height), _icon_path(icon_path), _camera(camera), _event_system(event_system){
   if(!glfwInit()){
     WEIGHT_ERROR("GLFW WILL NOT INITIALISE");
@@ -96,7 +96,7 @@ Window::Window(std::string title):_title(title){
 
 
 Window::~Window(){
-  #ifdef WEIGHT_USE_GLFW
+  #ifdef WEIGHT_DESKTOP
   WEIGHT_LOG("Shutting down window...");
   glfwDestroyWindow(_window);
   glfwTerminate();
@@ -104,19 +104,19 @@ Window::~Window(){
 }
 
 void Window::update(){
-  #ifdef WEIGHT_USE_GLFW
+  #ifdef WEIGHT_DESKTOP
   glfwSwapBuffers(_window);
   glfwPollEvents();
   #endif
 }
 
 bool Window::should_close(){
-  #ifdef WEIGHT_USE_GLFW
+  #ifdef WEIGHT_DESKTOP
   return glfwWindowShouldClose(_window);
   #endif
 }
 
-#ifdef WEIGHT_USE_GLFW
+#ifdef WEIGHT_DESKTOP
 int* Window::get_framebuffer(){
   int* result=new int[2];
   glfwGetFramebufferSize(_window, &result[0], &result[1]);

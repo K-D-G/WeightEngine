@@ -12,7 +12,7 @@ EventSystem::EventSystem(std::function<void(KeyEvent*)> _on_key_press, std::func
   on_mouse_scroll=_on_mouse_scroll;
   on_gamepad_event=_on_gamepad_event;
 
-  #ifdef WEIGHT_USE_GLFW
+  #ifdef WEIGHT_DESKTOP
   glfwUpdateGamepadMappings(Utils::load_file("WeightEngineResources/gamepad_mappings/default_mappings.txt").c_str());
   for(int i=0; i<GAMEPAD_LAST; i++){
     if(glfwJoystickPresent(i)){
@@ -57,7 +57,7 @@ Position2D EventSystem::get_mouse_pos(){
 }
 
 int EventSystem::get_key_state(int key){
-  #ifdef WEIGHT_USE_GLFW
+  #ifdef WEIGHT_DESKTOP
   return glfwGetKey(this->window->_window, key);
   #endif
 }
@@ -119,7 +119,7 @@ void EventSystem::_cursor_pos_callback(double xpos, double ypos){
 
 
 void EventSystem::_gamepad_callback(int jid, int event){
-  #ifdef WEIGHT_USE_GLFW
+  #ifdef WEIGHT_DESKTOP
   if(event==GAMEPAD_CONNECTED){
     if(glfwJoystickIsGamepad(jid)){
       Gamepad* gamepad=new Gamepad;

@@ -27,6 +27,11 @@ namespace Weight{
 
     int* _width;
     int* _height;
+
+    //Data to only be used when first running
+    Weight::Colour background_colour;
+    std::string background_path;
+    std::string icon_path;
   public:
     Weight::Window* window;
     Weight::EventSystem* event_system;
@@ -34,14 +39,14 @@ namespace Weight{
     Weight::RenderEngine::OrthographicCameraController* camera;
     Weight::Time* time;
 
-    Application();
+    #ifdef WEIGHT_DESKTOP
+    Application(std::string app_name, int width, int height, Weight::Colour _background_colour={}, std::string _background_path="", std::string _icon_path="");
+    #else
+    Application(std::string app_name);
+    #endif
     ~Application();
 
-    #ifdef WEIGHT_USE_GLFW
-    void run(std::string app_name, int width, int height, Colour background_colour={}, std::string background_path="", std::string icon_path="");
-    #else
-    void run(std::string app_name);
-    #endif
+    void run();
 
     virtual void on_start();
     virtual void on_update(float ts);

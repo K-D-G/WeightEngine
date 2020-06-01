@@ -48,6 +48,7 @@
 #include <WeightEngine/event_system.h>
 #include <WeightEngine/window.h>
 #include <WeightEngine/Application.h>
+#include <WeightEngine/entrypoint.h>
 
 
 #endif

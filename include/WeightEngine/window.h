@@ -9,7 +9,7 @@
 #include <stb_image.h>
 #include <glad/glad.h>
 
-#ifdef WEIGHT_USE_GLFW
+#ifdef WEIGHT_DESKTOP
   #include <GLFW/glfw3.h>
 #endif
 
@@ -20,7 +20,7 @@ namespace Weight{
   class WEIGHT_API Window{
     friend class Weight::EventSystem;
   private:
-    #ifdef WEIGHT_USE_GLFW
+    #ifdef WEIGHT_DESKTOP
     GLFWwindow* _window;
     int* _width;
     int* _height;
@@ -37,7 +37,7 @@ namespace Weight{
     Weight::RenderEngine::OrthographicCameraController* _camera;
     Weight::EventSystem* _event_system;
   public:
-    #ifdef WEIGHT_USE_GLFW
+    #ifdef WEIGHT_DESKTOP
     Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system);
     #else
     Window(std::string title);
@@ -47,7 +47,7 @@ namespace Weight{
     void update();
     bool should_close();
 
-    #ifdef WEIGHT_USE_GLFW
+    #ifdef WEIGHT_DESKTOP
     int* get_framebuffer();
     int* get_size();
     void set_size(int width, int height);

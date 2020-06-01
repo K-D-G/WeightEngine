@@ -3,14 +3,27 @@
 using namespace Weight;
 using namespace RenderEngine;
 
-Application::Application(){
-
-}
-
-#ifdef WEIGHT_USE_GLFW
-void Application::run(std::string app_name, int width, int height, Colour background_colour, std::string background_path, std::string icon_path){
+#ifdef WEIGHT_DESKTOP
+Application::Application(std::string app_name, int width, int height, Colour _background_colour, std::string _background_path, std::string _icon_path){
   _app_name=app_name;
   Log::init(app_name);
+
+  _width=new int;
+  _height=new int;
+  *(_width)=width;
+  *(_height)=height;
+
+  background_colour=_background_colour;
+  background_path=_background_path;
+  icon_path=_icon_path;
+}
+#else
+Application::Application(std::string app_name){
+
+}
+#endif
+
+void Application::run(){
   WEIGHT_LOG("Weight engine initialising...");
   WEIGHT_SUCCESS("SPD Log initialised");
 
@@ -33,11 +46,8 @@ void Application::run(std::string app_name, int width, int height, Colour backgr
   event_system=new EventSystem(e, e2, e3, e4);
 
   time=Time::get();
-  _width=new int;
-  _height=new int;
-  *(_width)=width;
-  *(_height)=height;
-  camera=new OrthographicCameraController((float)width/(float)height, event_system, _width, _height);
+
+  camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
 
   window=new Window(_app_name, _width, _height, icon_path, camera, event_system);
 
@@ -73,11 +83,6 @@ void Application::run(std::string app_name, int width, int height, Colour backgr
   OpenALHelpers::CloseAL();
   this->on_shutdown();
 }
-#else
-void Application::run(std::string app_name){
-  _app_name=app_name;
-}
-#endif
 
 void Application::_resize(int width, int height){
   renderer->camera->on_window_resize(width, height);
