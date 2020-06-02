@@ -17,6 +17,7 @@ int main(){
 }
 
 #elif defined(WEIGHT_ANDROID)
+
 #include <memory>
 #include <jni.h>
 #include <EGL/egl.h>
@@ -55,6 +56,8 @@ void android_main(android_app* state){
   //Setup stuff with window in the window class etc
   //Setup the sensors and events etc
   //Do stuff with the saved_state
+  //Don't forget to update core with the max textures
+  //Get from the ES version on android
   Weight::Application* app=Weight::create_application();
   app->run();
   delete app;

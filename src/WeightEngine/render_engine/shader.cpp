@@ -63,7 +63,8 @@ int Shader::get_uniform_location(std::string name){
   if(it!=_uniforms.end()){
     return it->second;
   }
-  return glGetUniformLocation(_id, name.c_str());
+  _uniforms[name]=glGetUniformLocation(_id, name.c_str());
+  return _uniforms[name];
 }
 
 void Shader::set_float(std::string name, float value){

@@ -14,7 +14,6 @@
 #elif defined(__APPLE__)
   #include <TargetConditionals.h>
   #if defined(TARGET_OS_MAC)
-    //#define WEIGHT_USE_GLFW
     #define WEIGHT_DESKTOP
     #define WEIGHT_SETUP using Application::Application
   #elif defined(TARGET_OS_IOS)
