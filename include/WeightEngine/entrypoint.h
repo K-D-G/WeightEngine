@@ -3,11 +3,11 @@
 #include <WeightEngine/core.h>
 #include <WeightEngine/Application.h>
 
-#if defined(WEIGHT_DESKTOP)
-
 namespace Weight{
   extern Weight::Application* create_application();
 }
+
+#if defined(WEIGHT_DESKTOP)
 
 int main(){
   Weight::Application* app=Weight::create_application();

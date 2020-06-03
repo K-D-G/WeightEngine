@@ -34,6 +34,10 @@
   #define WEIGHT_API
 #endif
 
+#ifndef WEIGHT_SETUP
+  #define WEIGHT_SETUP
+#endif
+
 #include <glad/glad.h>
 #define MAX_TEXTURES GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS
 #define MAX_PARTICLES 10000
