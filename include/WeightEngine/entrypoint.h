@@ -31,6 +31,7 @@ void android_main(android_app* state){
   memset(&weight_engine, 0, sizeof(WeightState));
   state->userData=&weight_engine;
   state->onInputEvent=; //Write this in event_system
+  weight_engine.app=state;
 
   //Get access to the sensors here
 
@@ -42,8 +43,9 @@ void android_main(android_app* state){
   //Do stuff with the saved_state
   //Don't forget to update core with the max textures
   //Get from the ES version on android
+  Weight::Android::WeightState* weight_engine_pointer=new Weight::Android::WeightState(weight_engine);
   Weight::Application* app=Weight::create_application();
-  app->run(weight_engine);
+  app->run(weight_engine_pointer);
   delete app;
 }
 

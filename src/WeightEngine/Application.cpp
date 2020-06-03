@@ -22,8 +22,8 @@ Application::Application(std::string app_name, int width, int height, Colour _ba
 }
 
 #ifdef WEIGHT_ANDROID
-void Application::run(WeightState* _weight_state){
-  weight_state=_weight_state;
+void Application::run(WeightState* _weight_engine){
+  weight_engine=_weight_engine;
   WEIGHT_LOG("Weight engine initialising...");
   WEIGHT_SUCCESS("SPD Log initialised");
 
@@ -35,7 +35,7 @@ void Application::run(WeightState* _weight_state){
 
   camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
 
-  window=new Window(_app_name, _width, _height, icon_path, camera, event_system, weight_state);
+  window=new Window(_app_name, _width, _height, icon_path, camera, event_system, weight_engine);
 
   renderer=new Renderer(_width, _height, background_colour, camera, background_path);
 

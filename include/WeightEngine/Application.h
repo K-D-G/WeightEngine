@@ -38,7 +38,7 @@ namespace Weight{
     std::string icon_path;
 
     #ifdef WEIGHT_ANDROID
-    Weight::Android::WeightState* weight_state;
+    Weight::Android::WeightState* weight_engine;
     #endif
   public:
     Weight::Window* window;
@@ -51,7 +51,7 @@ namespace Weight{
     ~Application();
 
     #ifdef WEIGHT_ANDROID
-    void run(Weight::Android::WeightState* _weight_state);
+    void run(Weight::Android::WeightState* _weight_engine);
     #else
     void run();
     #endif

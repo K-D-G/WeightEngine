@@ -87,7 +87,7 @@ Window::Window(std::string title, int* width, int* height, std::string icon_path
   WEIGHT_SUCCESS("Window initialised");
 }
 #elif defined(WEIGHT_ANDROID)
-Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_state):_title(title), _width(width), _height(height), _icon_path(icon_path), _camera(camera), _event_system(event_system), weight_state(_weight_state){
+Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_engine):_title(title), _width(width), _height(height), _icon_path(icon_path), _camera(camera), _event_system(event_system), weight_engine(_weight_engine){
   const EGLint attribs[]={
     EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
     EGL_BLUE_SIZE, 8,
@@ -125,7 +125,7 @@ Window::Window(std::string title, int* width, int* height, std::string icon_path
   }
 
   eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
-  surface=eglCreateWindowSurface(display, confif, weight_state->app->window, nullptr);
+  surface=eglCreateWindowSurface(display, config, weight_engine->app->window, nullptr);
   context=eglCreateContext(display, config, nullptr, nullptr);
   if(eglMakeCurrent(display, surface, surface, context)==EGL_FALSE){
     WEIGHT_ERROR("Window: Cannot make an OpenGLES context for Android");
@@ -135,16 +135,16 @@ Window::Window(std::string title, int* width, int* height, std::string icon_path
   eglQuerySurface(display, surface, EGL_WIDTH, &w);
   eglQuerySurface(display, surface, EGL_HEIGHT, &h);
 
-  weight_state->display=display;
-  weight_state->context=context;
-  weight_state->surface=surface;
-  weight_state->width=w;
-  weight_state->height=h;
+  weight_engine->display=display;
+  weight_engine->context=context;
+  weight_engine->surface=surface;
+  weight_engine->width=w;
+  weight_engine->height=h;
 
   *(_width)=w;
   *(_height)=h;
 
-  glViewport(0, 0, weight_state->width, weight_state->height);
+  glViewport(0, 0, weight_engine->width, weight_engine->height);
 
   WEIGHT_SUCCESS("OpenGLES functions loaded");
   WEIGHT_LOG("OpenGLES version: {0}", glGetString(GL_VERSION));
@@ -158,30 +158,55 @@ Window::Window(std::string title, int* width, int* height, std::string icon_path
 
 Window::~Window(){
   WEIGHT_LOG("Shutting down window...");
-  #ifdef WEIGHT_DESKTOP
+  #if defined(WEIGHT_DESKTOP)
   glfwDestroyWindow(_window);
   glfwTerminate();
+  #elif defined(WEIGHT_ANDROID)
+  if(weight_engine->display!=EGL_NO_DISPLAY){
+    eglMakeCurrent(weight_engine->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    if(weight_engine->context!=EGL_NO_CONTEXT){
+      eglDestroyContext(weight_engine->display, weight_engine->context);
+    }
+    if(weight_engine->surface!=EGL_NO_SURFACE){
+      eglDestroySurface(weight_engine->display, weight_engine->surface);
+    }
+    eglTerminate(weight_engine->display);
+  }
+  weight_engine->display=EGL_NO_DISPLAY;
+  weight_engine->context=EGL_NO_CONTEXT;
+  weight_engine->surface=EGL_NO_SURFACE;
   #endif
 }
 
 void Window::update(){
-  #ifdef WEIGHT_DESKTOP
+  #if defined(WEIGHT_DESKTOP)
   glfwSwapBuffers(_window);
   glfwPollEvents();
+  #elif defined(WEIGHT_ANDROID)
+  eglSwapBuffers(weight_engine->display, weight_engine->surface);
+  if(weight_engine->state->destroyRequested!=0){
+    _should_close=true;
+  }
   #endif
 }
 
 bool Window::should_close(){
-  #ifdef WEIGHT_DESKTOP
+  #if defined(WEIGHT_DESKTOP)
   return glfwWindowShouldClose(_window);
+  #elif defined(WEIGHT_ANDROID)
+  return _should_close;
   #endif
 }
 
-#ifdef WEIGHT_DESKTOP
+
 int* Window::get_framebuffer(){
+  #if defined(WEIGHT_DESKTOP)
   int* result=new int[2];
   glfwGetFramebufferSize(_window, &result[0], &result[1]);
   return result;
+  #elif defined(WEIGHT_ANDROID)
+  return get_size();
+  #endif
 }
 
 int* Window::get_size(){
@@ -191,6 +216,7 @@ int* Window::get_size(){
   return result;
 }
 
+#ifdef WEIGHT_DESKTOP
 void Window::set_size(int width, int height){
   *(_width)=width;
   *(_height)=height;

@@ -36,7 +36,8 @@ namespace Weight{
 
     window_data data;
     #elif defined(WEIGHT_ANDROID)
-    Weight::Android::WeightState* weight_state;
+    Weight::Android::WeightState* weight_engine;
+    bool _should_close;
     #endif
     int* _width;
     int* _height;
@@ -49,23 +50,23 @@ namespace Weight{
     #if defined(WEIGHT_DESKTOP)
     Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system);
     #elif defined(WEIGHT_ANDROID)
-    Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_state);
+    Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_engine);
     #endif
     ~Window();
 
     void update();
     bool should_close();
 
-    #ifdef WEIGHT_DESKTOP
     int* get_framebuffer();
     int* get_size();
+
+    #ifdef WEIGHT_DESKTOP
     void set_size(int width, int height);
     std::string get_title();
     void set_title(std::string title);
 
     void hide_cursor();
     void show_cursor();
-
     #endif
   };
 }
