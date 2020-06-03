@@ -1,11 +1,9 @@
 #ifndef WEIGHT_ENGINE__CORE_H
 #define WEIGHT_ENGINE__CORE_H
 
-#define WEIGHT_DEBUG
-
 #if defined(WIN32)||defined(_WIN32)||defined(__WIN32__)||defined(__NT__)
   #define WEIGHT_DESKTOP
-  #define WEIGHT_WINDOWS 
+  #define WEIGHT_WINDOWS
   #ifdef WEIGHT_BUILD
     #define WEIGHT_API __declspec(dllexport)
   #else
