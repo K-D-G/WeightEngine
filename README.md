@@ -1,4 +1,8 @@
-# Weight Engine Copyright &copy; KiloGram 2020. All rights reserved. Terms of use found in "LICENSE.md"
+# Weight Engine
+
+![image](Branding/KiloGramLogo.png)
+
+Copyright &copy; KiloGram 2020. All rights reserved. Terms of use found in "LICENSE.md"
 
 This is a game engine written in C++ which has/will have support for multiple platforms. From Desktop (Windows, Mac, Linux) to Mobile (IOS, Android) to consoles (PS4, Xbox, Nintendo Switch)
 
