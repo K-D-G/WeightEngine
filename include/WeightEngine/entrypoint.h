@@ -17,41 +17,25 @@ int main(){
 }
 
 #elif defined(WEIGHT_ANDROID)
-
 #include <memory>
 #include <jni.h>
 #include <EGL/egl.h>
 #include <GLES/gl.h>
-
 #include <android/sensor.h>
-#include <android_native_app_glue.h>
 
-struct savedstate{
-
-};
-
-struct weight_state{
-  android_app* app;
-
-  EGLDisplay display;
-  EGLSurface surface;
-  EGLContext context;
-  int width;
-  int height;
-
-  savedstate saved_state;
-};
+#include <WeightEngine/android_wrappers/android_native_app_glue.h>
+#include <WeightEngine/android_wrappers/android_structs.h>
 
 void android_main(android_app* state){
-  weight_state weight_engine;
-  memset(&weight_engine, 0, sizeof(weight_state));
+  Weight::Android::WeightState weight_engine;
+  memset(&weight_engine, 0, sizeof(WeightState));
   state->userData=&weight_engine;
   state->onInputEvent=; //Write this in event_system
 
   //Get access to the sensors here
 
   if(state->savedState!=nullptr){
-    weight_engine.state=*(savedstate*)state->savedState;
+    weight_engine.state=*(Weight::Android::SavedState*)state->savedState;
   }
   //Setup stuff with window in the window class etc
   //Setup the sensors and events etc
@@ -59,7 +43,7 @@ void android_main(android_app* state){
   //Don't forget to update core with the max textures
   //Get from the ES version on android
   Weight::Application* app=Weight::create_application();
-  app->run();
+  app->run(weight_engine);
   delete app;
 }
 

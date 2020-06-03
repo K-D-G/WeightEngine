@@ -36,7 +36,6 @@ Window::Window(std::string title, int* width, int* height, std::string icon_path
   }
   glfwMakeContextCurrent(_window);
   glfwSwapInterval(1);
-  WEIGHT_SUCCESS("Window initialised");
 
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
     WEIGHT_ERROR("CANNOT LOAD OPENGL FUNCTIONS USING GLAD");
@@ -87,17 +86,79 @@ Window::Window(std::string title, int* width, int* height, std::string icon_path
   WEIGHT_SUCCESS("Set callbacks for the window");
   WEIGHT_SUCCESS("Window initialised");
 }
-#else
-Window::Window(std::string title):_title(title){
+#elif defined(WEIGHT_ANDROID)
+Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_state):_title(title), _width(width), _height(height), _icon_path(icon_path), _camera(camera), _event_system(event_system), weight_state(_weight_state){
+  const EGLint attribs[]={
+    EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+    EGL_BLUE_SIZE, 8,
+    EGL_GREEN_SIZE, 8,
+    EGL_RED_SIZE, 8,
+    EGL_NONE
+  };
+  EGLint w, h, format;
+  EGLint number_configs;
+  EGLConfig config=nullptr;
+  EGLSurface surface;
+  EGLContext context;
+  EGLDisplay display=eglGetDisplay(EGL_DEFAULT_DISPLAY);
+  eglInitialize(display, nullptr, nullptr);
+  eglChooseConfig(display, attribs, nullptr, 0, &number_configs);
+  std::unique_ptr<EGLConfig[]> supported_configs(new EGLConfig[number_configs]);
+  assert(supported_configs);
+  eglChooseConfig(display, attribs, supported_configs.get(), number_configs, &number_configs);
+  assert(number_configs);
+  int i=0;
+  for(; i<number_configs; i++){
+    EGLConfig &cfg=supported_configs[i];
+    EGLint r, g, b, d;
+    if(eglGetConfigAttrib(display, cfg, EGL_RED_SIZE, &r)&&eglGetConfigAttrib(display, cfg, EGL_GREEN_SIZE, &g)&&eglGetConfigAttrib(display, cfg, EGL_BLUE_SIZE, &b)&&eglGetConfigAttrib(display, cfg, EGL_DEPTH_SIZE, &d)&&r==8&&g==8&&b==8&&d==0){
+      config=supported_configs[i];
+      break;
+    }
+  }
+  if(i==number_configs){
+    config=supported_configs[0];
+  }
+  if(config==nullptr){
+    WEIGHT_ERROR("Window: Cannot initialise a configuration for EGL on Android");
+    this->Window::~Window();
+  }
 
+  eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, &format);
+  surface=eglCreateWindowSurface(display, confif, weight_state->app->window, nullptr);
+  context=eglCreateContext(display, config, nullptr, nullptr);
+  if(eglMakeCurrent(display, surface, surface, context)==EGL_FALSE){
+    WEIGHT_ERROR("Window: Cannot make an OpenGLES context for Android");
+    this->Window::~Window();
+  }
+
+  eglQuerySurface(display, surface, EGL_WIDTH, &w);
+  eglQuerySurface(display, surface, EGL_HEIGHT, &h);
+
+  weight_state->display=display;
+  weight_state->context=context;
+  weight_state->surface=surface;
+  weight_state->width=w;
+  weight_state->height=h;
+
+  *(_width)=w;
+  *(_height)=h;
+
+  glViewport(0, 0, weight_state->width, weight_state->height);
+
+  WEIGHT_SUCCESS("OpenGLES functions loaded");
+  WEIGHT_LOG("OpenGLES version: {0}", glGetString(GL_VERSION));
+
+  WEIGHT_SUCCESS("Set callbacks for the window");
+  WEIGHT_SUCCESS("Window initialised");
 }
 #endif
 
 
 
 Window::~Window(){
-  #ifdef WEIGHT_DESKTOP
   WEIGHT_LOG("Shutting down window...");
+  #ifdef WEIGHT_DESKTOP
   glfwDestroyWindow(_window);
   glfwTerminate();
   #endif

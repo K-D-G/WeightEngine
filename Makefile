@@ -6,6 +6,7 @@ objects=obj/WeightEngine/utils/log.o \
 				obj/WeightEngine/utils/random.o \
 				obj/WeightEngine/utils/audio_utils.o \
 				obj/WeightEngine/utils/profiling.o \
+				obj/WeightEngine/android_wrappers/android_native_app_glue.o \
 				obj/WeightEngine/window.o \
 				obj/WeightEngine/event_system.o \
 				obj/WeightEngine/audio/listener.o \

@@ -3,7 +3,10 @@
 using namespace Weight;
 using namespace RenderEngine;
 
-#ifdef WEIGHT_DESKTOP
+#ifdef WEIGHT_ANDROID
+using namespace Android;
+#endif
+
 Application::Application(std::string app_name, int width, int height, Colour _background_colour, std::string _background_path, std::string _icon_path){
   _app_name=app_name;
   Log::init(app_name);
@@ -17,50 +20,24 @@ Application::Application(std::string app_name, int width, int height, Colour _ba
   background_path=_background_path;
   icon_path=_icon_path;
 }
-#else
-Application::Application(std::string app_name){
 
-}
-#endif
-
-void Application::run(){
+#ifdef WEIGHT_ANDROID
+void Application::run(WeightState* _weight_state){
+  weight_state=_weight_state;
   WEIGHT_LOG("Weight engine initialising...");
   WEIGHT_SUCCESS("SPD Log initialised");
 
-  std::function<void(KeyEvent*)> e=[=](KeyEvent* k){
-    this->on_key_press(k);
-  };
-
-  std::function<void(MousePressEvent*)> e2=[=](MousePressEvent* mp){
-    this->on_mouse_press(mp);
-  };
-
-  std::function<void(MouseScrollEvent*)> e3=[=](MouseScrollEvent* ms){
-    this->on_mouse_scroll(ms);
-  };
-
-  std::function<void(Gamepad*)> e4=[=](Gamepad* g){
-    this->on_gamepad_event(g);
-  };
-
-  event_system=new EventSystem(e, e2, e3, e4);
-
   time=Time::get();
-
-  camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
-
-  window=new Window(_app_name, _width, _height, icon_path, camera, event_system);
-
-  renderer=new Renderer(_width, _height, background_colour, camera, background_path);
-
-  event_system->_setup(renderer->gui_renderer, camera->zoom_level);
-
   Random::init();
 
   OpenALHelpers::InitAL("");
-
   AudioUtils::set_distance_model(EXPONENT_DISTANCE);
 
+  camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
+
+  window=new Window(_app_name, _width, _height, icon_path, camera, event_system, weight_state);
+
+  renderer=new Renderer(_width, _height, background_colour, camera, background_path);
 
   WEIGHT_SUCCESS("Initialisation completed");
   WEIGHT_LOG("Starting application");
@@ -83,6 +60,65 @@ void Application::run(){
   OpenALHelpers::CloseAL();
   this->on_shutdown();
 }
+#else
+void Application::run(){
+  WEIGHT_LOG("Weight engine initialising...");
+  WEIGHT_SUCCESS("SPD Log initialised");
+
+  time=Time::get();
+  Random::init();
+
+  OpenALHelpers::InitAL("");
+  AudioUtils::set_distance_model(EXPONENT_DISTANCE);
+
+  std::function<void(KeyEvent*)> e=[=](KeyEvent* k){
+    this->on_key_press(k);
+  };
+
+  std::function<void(MousePressEvent*)> e2=[=](MousePressEvent* mp){
+    this->on_mouse_press(mp);
+  };
+
+  std::function<void(MouseScrollEvent*)> e3=[=](MouseScrollEvent* ms){
+    this->on_mouse_scroll(ms);
+  };
+
+  std::function<void(Gamepad*)> e4=[=](Gamepad* g){
+    this->on_gamepad_event(g);
+  };
+
+  event_system=new EventSystem(e, e2, e3, e4);
+
+  camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
+
+  window=new Window(_app_name, _width, _height, icon_path, camera, event_system);
+
+  renderer=new Renderer(_width, _height, background_colour, camera, background_path);
+
+  event_system->_setup(renderer->gui_renderer, camera->zoom_level);
+
+  WEIGHT_SUCCESS("Initialisation completed");
+  WEIGHT_LOG("Starting application");
+  this->on_start();
+  while(!window->should_close()){
+    time->update();
+    camera->on_update(time->get_time_step());
+    this->on_update(time->get_time_step());
+    renderer->render(time->get_time_step());
+    window->update();
+    event_system->update();
+  }
+  WEIGHT_LOG("Shutting down application");
+
+  #ifdef WEIGHT_DEBUG
+  WEIGHT_LOG("Saving profiling data");
+  ProfileAggregator::get()->aggregate("profile.json");
+  #endif
+
+  OpenALHelpers::CloseAL();
+  this->on_shutdown();
+}
+#endif
 
 void Application::_resize(int width, int height){
   renderer->camera->on_window_resize(width, height);

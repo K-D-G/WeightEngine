@@ -5,7 +5,7 @@
 
 #if defined(WIN32)||defined(_WIN32)||defined(__WIN32__)||defined(__NT__)
   #define WEIGHT_DESKTOP
-  #define WEIGHT_SETUP using Application::Application
+  #define WEIGHT_WINDOWS 
   #ifdef WEIGHT_BUILD
     #define WEIGHT_API __declspec(dllexport)
   #else
@@ -15,7 +15,7 @@
   #include <TargetConditionals.h>
   #if defined(TARGET_OS_MAC)
     #define WEIGHT_DESKTOP
-    #define WEIGHT_SETUP using Application::Application
+    #define WEIGHT_MAC
   #elif defined(TARGET_OS_IOS)
     #define WEIGHT_MOBILE
     #define WEIGHT_IOS
@@ -23,7 +23,7 @@
 #elif defined(__linux__)
   #if !defined(__ANDROID__)
     #define WEIGHT_DESKTOP
-    #define WEIGHT_SETUP using Application::Application
+    #define WEIGHT_LINUX
   #else
     #define WEIGHT_MOBILE
     #define WEIGHT_ANDROID
@@ -34,9 +34,7 @@
   #define WEIGHT_API
 #endif
 
-#ifndef WEIGHT_SETUP
-  #define WEIGHT_SETUP
-#endif
+#define WEIGHT_SETUP using Application::Application
 
 #include <glad/glad.h>
 #define MAX_TEXTURES GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS

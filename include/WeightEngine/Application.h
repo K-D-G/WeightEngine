@@ -17,6 +17,10 @@
 
 #include <ALLibraries/alhelpers.h>
 
+#ifdef WEIGHT_ANDROID
+#include <WeightEngine/android_wrappers/android_structs.h>
+#endif
+
 namespace Weight{
   class WEIGHT_API Application{
     friend class Window;
@@ -32,6 +36,10 @@ namespace Weight{
     Weight::Colour background_colour;
     std::string background_path;
     std::string icon_path;
+
+    #ifdef WEIGHT_ANDROID
+    Weight::Android::WeightState* weight_state;
+    #endif
   public:
     Weight::Window* window;
     Weight::EventSystem* event_system;
@@ -39,14 +47,15 @@ namespace Weight{
     Weight::RenderEngine::OrthographicCameraController* camera;
     Weight::Time* time;
 
-    #ifdef WEIGHT_DESKTOP
     Application(std::string app_name, int width, int height, Weight::Colour _background_colour={}, std::string _background_path="", std::string _icon_path="");
-    #else
-    Application(std::string app_name);
-    #endif
     ~Application();
 
+    #ifdef WEIGHT_ANDROID
+    void run(Weight::Android::WeightState* _weight_state);
+    #else
     void run();
+    #endif
+
 
     virtual void on_start();
     virtual void on_update(float ts);
