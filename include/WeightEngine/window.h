@@ -7,10 +7,10 @@
 
 
 #include <stb_image.h>
-#include <glad/glad.h>
 
 #if defined(WEIGHT_DESKTOP)
   #include <GLFW/glfw3.h>
+  #include <glad/glad.h>
 #elif defined(WEIGHT_ANDROID)
   #include <memory>
   #include <jni.h>
@@ -19,6 +19,7 @@
   #include <android/sensor.h>
   #include <WeightEngine/android_wrappers/android_native_app_glue.h>
   #include <WeightEngine/android_wrappers/android_structs.h>
+#elif defined(WEIGHT_IOS)
 #endif
 
 #include <string>

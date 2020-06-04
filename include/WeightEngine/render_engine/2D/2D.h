@@ -16,7 +16,13 @@
 
 #include <cstdlib>
 
-#include <glad/glad.h>
+#if defined(WEIGHT_DESKTOP)
+  #include <glad/glad.h>
+#elif defined(WEIGHT_ANDROID)
+  #include <EGL/egl.h>
+  #include <GLES/gl.h>
+#elif defined(WEIGHT_IOS)
+#endif
 #include <glm/glm.hpp>
 
 namespace Weight{

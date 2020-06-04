@@ -34,7 +34,13 @@
 
 #define WEIGHT_SETUP using Application::Application
 
-#include <glad/glad.h>
+#if defined(WEIGHT_DESKTOP)
+  #include <glad/glad.h>
+#elif defined(WEIGHT_ANDROID)
+  #include <EGL/egl.h>
+  #include <GLES/gl.h>
+#elif defined(WEIGHT_IOS)
+#endif
 #define MAX_TEXTURES GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS
 #define MAX_PARTICLES 10000
 #define MAX_QUADS 100000

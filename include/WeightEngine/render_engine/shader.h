@@ -4,7 +4,13 @@
 #include <WeightEngine/utils/log.h>
 #include <WeightEngine/utils/utils.h>
 
-#include <glad/glad.h>
+#if defined(WEIGHT_DESKTOP)
+  #include <glad/glad.h>
+#elif defined(WEIGHT_ANDROID)
+  #include <EGL/egl.h>
+  #include <GLES/gl.h>
+#elif defined(WEIGHT_IOS)
+#endif
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
 
