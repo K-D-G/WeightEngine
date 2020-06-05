@@ -29,15 +29,14 @@ int main(){
 void android_main(android_app* state){
   Weight::Android::WeightState weight_engine;
   memset(&weight_engine, 0, sizeof(WeightState));
-  state->userData=&weight_engine;
-  state->onAppCmd=; //Dk where to write this
-  state->onInputEvent=; //Write this in event_system
-  weight_engine.app=state;
+  Weight::Android::WeightState* weight_engine_pointer=new Weight::Android::WeightState(weight_engine);
+  weight_engine_pointer->app=state;
+  weight_engine_pointer->app->userData=weight_engine_pointer;
 
   //Get access to the sensors here
 
-  if(state->savedState!=nullptr){
-    weight_engine.state=*(Weight::Android::SavedState*)state->savedState;
+  if(weight_engine_pointer->app->savedState!=nullptr){
+    weight_engine_pointer->state=*(Weight::Android::SavedState*)weight_engine_pointer->app->savedState;
   }
   //Setup stuff with window in the window class etc
   //Setup the sensors and events etc
@@ -45,8 +44,11 @@ void android_main(android_app* state){
   //Don't forget to update core with the max textures
   //Get from the ES version on android
   //Remove boost stuff and no to scripting language->pure C++?
-  Weight::Android::WeightState* weight_engine_pointer=new Weight::Android::WeightState(weight_engine);
   Weight::Application* app=Weight::create_application();
+
+  weight_engine_pointer->app->onAppCmd=app->handle_android_cmd;
+  weight_engine_pointer->app->onInputEvent=app->event_system->handle_android_input;
+
   app->run(weight_engine_pointer);
   delete app;
 }

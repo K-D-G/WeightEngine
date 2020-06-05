@@ -3,7 +3,7 @@
 using namespace Weight;
 
 #ifdef WEIGHT_DESKTOP
-Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system):_title(title), _width(width), _height(height), _icon_path(icon_path), _camera(camera), _event_system(event_system){
+Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system):_title(title), _width(width), _height(height), _icon_path(icon_path), _should_close(false), _has_focus(true), _camera(camera), _event_system(event_system){
   if(!glfwInit()){
     WEIGHT_ERROR("GLFW WILL NOT INITIALISE");
     this->Window::~Window();
@@ -197,6 +197,26 @@ bool Window::should_close(){
   return _should_close;
   #endif
 }
+
+bool Window::has_focus(){
+  #if defined(WEIGHT_DESKTOP)
+  _has_focus=glfwGetWindowAttrib(_window, GLFW_FOCUSED);
+  #endif
+  return _has_focus;
+}
+
+void Window::close(){
+  #if defined(WEIGHT_DESKTOP)
+  glfwSetWindowShouldClose(_window, GLFW_TRUE);
+  #elif defined(WEIGHT_ANDROID)
+  _should_close=true;
+  #endif
+}
+
+bool Window::set_has_focus(bool val){
+  _has_focus=val;
+}
+
 
 
 int* Window::get_framebuffer(){

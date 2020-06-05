@@ -18,6 +18,8 @@
 #include <ALLibraries/alhelpers.h>
 
 #ifdef WEIGHT_ANDROID
+#include <cstdint>
+#include <WeightEngine/android_wrappers/android_native_app_glue.h>
 #include <WeightEngine/android_wrappers/android_structs.h>
 #endif
 
@@ -56,6 +58,10 @@ namespace Weight{
     void run();
     #endif
 
+
+    #ifdef WEIGHT_ANDROID
+    void handle_android_cmd(android_app* app, int32_t cmd);
+    #endif
 
     virtual void on_start();
     virtual void on_update(float ts);

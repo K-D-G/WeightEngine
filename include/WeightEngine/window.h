@@ -43,6 +43,7 @@ namespace Weight{
     int* _width;
     int* _height;
     std::string _icon_path;
+    bool _has_focus;
 
     std::string _title;
     Weight::RenderEngine::OrthographicCameraController* _camera;
@@ -57,6 +58,9 @@ namespace Weight{
 
     void update();
     bool should_close();
+    bool has_focus();
+    void set_has_focus(bool val);
+    void close();
 
     int* get_framebuffer();
     int* get_size();

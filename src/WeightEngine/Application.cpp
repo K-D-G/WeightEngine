@@ -42,7 +42,7 @@ void Application::run(WeightState* _weight_engine){
   WEIGHT_SUCCESS("Initialisation completed");
   WEIGHT_LOG("Starting application");
   this->on_start();
-  while(!window->should_close()){
+  while(!window->should_close()&&window->has_focus()){
     time->update();
     camera->on_update(time->get_time_step());
     this->on_update(time->get_time_step());
@@ -100,7 +100,7 @@ void Application::run(){
   WEIGHT_SUCCESS("Initialisation completed");
   WEIGHT_LOG("Starting application");
   this->on_start();
-  while(!window->should_close()){
+  while(!window->should_close()&&window->has_focus()){
     time->update();
     camera->on_update(time->get_time_step());
     this->on_update(time->get_time_step());
@@ -117,6 +117,32 @@ void Application::run(){
 
   OpenALHelpers::CloseAL();
   this->on_shutdown();
+}
+#endif
+
+#ifdef WEIGHT_ANDROID
+void Application::handle_android_cmd(android_app* app, int32_t cmd){
+  WeightState* engine=(WeightEngine*)app->userData;
+  switch(cmd){
+    case APP_CMD_SAVE_STATE:
+      engine->app->savedState=malloc(sizeof(SavedState));
+      *((SavedState)engine->app->savedState)=engine->state;
+      break;
+    case APP_CMD_INIT_WINDOW:
+      if(engine->app->window==nullptr){
+        window=new Window(_app_name, _width, _height, icon_path, camera, event_system);
+      }
+      break;
+    case APP_CMD_TERM_WINDOW:
+      window->close();
+      break;
+    case APP_CMD_GAINED_FOCUS:
+      window->set_has_focus(true);
+      break;
+    case APP_CMD_LOST_FOCUS:
+      window->set_has_focus(false);
+      break;
+  }
 }
 #endif
 

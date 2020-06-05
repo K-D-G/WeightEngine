@@ -13,8 +13,11 @@
 #include <WeightEngine/utils/maths_utils.h>
 #include <WeightEngine/render_engine/gui/gui_renderer.h>
 
-#ifdef WEIGHT_DESKTOP
+#if defined(WEIGHT_DESKTOP)
 #include <GLFW/glfw3.h>
+#elif defined(WEIGHT_ANDROID)
+#include <WeightEngine/android_wrappers/android_structs.h>
+#include <WeightEngine/android_wrappers/android_native_app_glue.h>
 #endif
 
 #define GET_EVENT(type, x) static_cast<type*>(x.get())
