@@ -60,7 +60,7 @@ namespace Weight{
 
 
     #ifdef WEIGHT_ANDROID
-    void handle_android_cmd(android_app* app, int32_t cmd);
+    void _handle_android_cmd(android_app* app, int32_t cmd);
     #endif
 
     virtual void on_start();

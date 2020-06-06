@@ -85,6 +85,10 @@ namespace Weight{
     bool check_modifier(int modifier, int var);
 
     void _setup(Weight::RenderEngine::GUI::GUIRenderer* _gui_renderer, float* _zoom_level);
+
+    #ifdef WEIGHT_ANDROID
+    void _handle_android_input(android_app* app, AInputEvent* event);
+    #endif
   private:
     void _key_callback(int key, int action, int modifiers);
     void _key_callback_gui(int key, int action, int modifiers);

@@ -5,6 +5,10 @@ using namespace Weight;
 using namespace RenderEngine;
 using namespace GUI;
 
+#ifdef WEIGHT_ANDROID
+using namespace Android;
+#endif
+
 EventSystem::EventSystem(std::function<void(KeyEvent*)> _on_key_press, std::function<void(MousePressEvent*)>_on_mouse_press, std::function<void(MouseScrollEvent*)>_on_mouse_scroll, std::function<void(Gamepad*)> _on_gamepad_event){
   _mouse_pos=new double[2];
   on_key_press=_on_key_press;
@@ -75,6 +79,13 @@ void EventSystem::_setup(GUIRenderer* _gui_renderer, float* _zoom_level){
   gui_renderer=_gui_renderer;
   zoom_level=_zoom_level;
 }
+
+#ifdef WEIGHT_ANDROID
+void EventSystem::_handle_android_input(android_app* app, AInputEvent* event){
+  WeightState* weight_engine=(WeightState*)app->userData;
+  
+}
+#endif
 
 void EventSystem::_key_callback(int key, int action, int modifiers){
   std::thread t(&EventSystem::_key_callback_gui, this, key, action, modifiers);

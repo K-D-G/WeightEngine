@@ -46,8 +46,8 @@ void android_main(android_app* state){
   //Remove boost stuff and no to scripting language->pure C++?
   Weight::Application* app=Weight::create_application();
 
-  weight_engine_pointer->app->onAppCmd=app->handle_android_cmd;
-  weight_engine_pointer->app->onInputEvent=app->event_system->handle_android_input;
+  weight_engine_pointer->app->onAppCmd=app->_handle_android_cmd;
+  weight_engine_pointer->app->onInputEvent=app->event_system->_handle_android_input;
 
   app->run(weight_engine_pointer);
   delete app;

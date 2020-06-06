@@ -121,7 +121,7 @@ void Application::run(){
 #endif
 
 #ifdef WEIGHT_ANDROID
-void Application::handle_android_cmd(android_app* app, int32_t cmd){
+void Application::_handle_android_cmd(android_app* app, int32_t cmd){
   WeightState* engine=(WeightEngine*)app->userData;
   switch(cmd){
     case APP_CMD_SAVE_STATE:
