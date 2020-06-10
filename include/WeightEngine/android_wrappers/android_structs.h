@@ -19,13 +19,17 @@ namespace Weight{
     struct WeightState{
       android_app* app;
 
+      ASensorManager* sensor_manager;
+      const ASensor* accelerometer;
+      ASensorEventQueue* sensor_event_queue;
+
       EGLDisplay display;
       EGLSurface surface;
       EGLContext context;
       int width;
       int height;
 
-      savedstate saved_state;
+      SavedState saved_state;
     };
   }
 }

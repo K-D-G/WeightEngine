@@ -67,10 +67,14 @@ namespace Weight{
     virtual void on_update(float ts);
     virtual void on_shutdown();
 
+    #if defined(WEIGHT_DESKTOP)
     virtual void on_key_press(Weight::KeyEvent* e);
     virtual void on_mouse_press(Weight::MousePressEvent* e);
     virtual void on_mouse_scroll(Weight::MouseScrollEvent* e);
     virtual void on_gamepad_event(Weight::Gamepad* g);
+    #elif defined(WEIGHT_MOBILE)
+    virtual void on_touch(Weight::TouchEvent* e);
+    #endif
 
   };
 }

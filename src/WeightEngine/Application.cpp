@@ -33,11 +33,19 @@ void Application::run(WeightState* _weight_engine){
   OpenALHelpers::InitAL("");
   AudioUtils::set_distance_model(EXPONENT_DISTANCE);
 
+  std::function<void(TouchEvent*)> e=[=](TouchEvent* t){
+    this->on_touch(t);
+  }
+
+  event_system=new EventSystem(e);
+
   camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
 
   window=new Window(_app_name, _width, _height, icon_path, camera, event_system, weight_engine);
 
   renderer=new Renderer(_width, _height, background_colour, camera, background_path);
+
+  event_system->_setup(renderer->gui_renderer, camera->zoom_level);
 
   WEIGHT_SUCCESS("Initialisation completed");
   WEIGHT_LOG("Starting application");
@@ -65,12 +73,6 @@ void Application::run(){
   WEIGHT_LOG("Weight engine initialising...");
   WEIGHT_SUCCESS("SPD Log initialised");
 
-  time=Time::get();
-  Random::init();
-
-  OpenALHelpers::InitAL("");
-  AudioUtils::set_distance_model(EXPONENT_DISTANCE);
-
   std::function<void(KeyEvent*)> e=[=](KeyEvent* k){
     this->on_key_press(k);
   };
@@ -89,7 +91,7 @@ void Application::run(){
 
   event_system=new EventSystem(e, e2, e3, e4);
 
-  camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
+  camera=new OrthographicCameraController((float)(*(_width))/(float)(*(_height)), event_system, _width, _height);
 
   window=new Window(_app_name, _width, _height, icon_path, camera, event_system);
 
@@ -97,10 +99,16 @@ void Application::run(){
 
   event_system->_setup(renderer->gui_renderer, camera->zoom_level);
 
+  time=Time::get();
+  Random::init();
+
+  OpenALHelpers::InitAL("");
+  AudioUtils::set_distance_model(EXPONENT_DISTANCE);
+
   WEIGHT_SUCCESS("Initialisation completed");
   WEIGHT_LOG("Starting application");
   this->on_start();
-  while(!window->should_close()&&window->has_focus()){
+  while(!window->should_close()){
     time->update();
     camera->on_update(time->get_time_step());
     this->on_update(time->get_time_step());
@@ -168,6 +176,7 @@ void Application::on_shutdown(){
   WEIGHT_ERROR("Must define an on_shutdown method in your application class");
 }
 
+#if defined(WEIGHT_DESKTOP)
 void Application::on_key_press(KeyEvent* e){
 
 }
@@ -180,3 +189,8 @@ void Application::on_mouse_scroll(MouseScrollEvent* e){
 void Application::on_gamepad_event(Gamepad* g){
 
 }
+#elif defined(WEIGHT_MOBILE)
+void Application::on_touch(TouchEvent* e){
+
+}
+#endif

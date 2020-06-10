@@ -2,19 +2,42 @@
 #define WEIGHT_ENGINE__UTILS__KEYCODES_H
 #include <WeightEngine/core.h>
 
-#ifdef WEIGHT_DESKTOP
+#if defined(WEIGHT_DESKTOP)
 #include <GLFW/glfw3.h>
+#endif
+
 //Type codes
 #define KEY 0
 #define MOUSE_CLICK 1
 #define MOUSE_SCROLL 2
 #define GAMEPAD 3
+#define TOUCH 4
 
+#if defined(WEIGHT_DESKTOP)
 //Action codes
 #define PRESS GLFW_PRESS
 #define RELEASE GLFW_RELEASE
 #define REPEAT GLFW_REPEAT
 #define SCROLL 3
+#elif defined(WEIGHT_MOBILE)
+#if defined(WEIGHT_ANDROID)
+
+#include <android/sensor.h>
+#include <WeightEngine/android_wrappers/android_native_app_glue.h>
+#include <WeightEngine/android_wrappers/android_structs.h>
+
+//Action codes
+#define PRESS AMOTION_EVENT_ACTION_DOWN
+#define RELEASE AMOTION_EVENT_ACTION_UP
+#define MOVE AMOTION_EVENT_ACTION_MOVE
+
+#elif defined(WEIGHT_IOS)
+
+#endif
+
+#endif
+
+#if defined(WEIGHT_DESKTOP)
 
 //Mouse codes
 #define MOUSE_BUTTON_1	GLFW_MOUSE_BUTTON_1
@@ -203,6 +226,8 @@
 #define KEY_RIGHT_SUPER GLFW_KEY_RIGHT_SUPER
 #define KEY_MENU GLFW_KEY_MENU
 #define KEY_LAST GLFW_KEY_LAST
+
+#elif defined(WEIGHT_MOBILE)
 
 #endif
 

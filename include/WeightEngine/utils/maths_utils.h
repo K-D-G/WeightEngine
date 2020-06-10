@@ -1,5 +1,6 @@
 #ifndef WEIGHT_ENGINE__UTILS__MATHS_UTILS_H
 #define WEIGHT_ENGINE__UTILS__MATHS_UTILS_H
+#include <WeightEngine/core.h>
 
 namespace Weight{
   class WEIGHT_API Maths{

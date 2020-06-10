@@ -124,7 +124,7 @@ void ParticleSystem2D::render(glm::mat4 mvp, float ts){
   }
 
   Particle2DShader::get()->bind();
-  Particle2DShader::get()->set_matrix("mvp", mvp);;
+  Particle2DShader::get()->set_matrix("mvp", mvp);
   glBindVertexArray(vertex_array);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, index_buffer);
   glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);

@@ -16,8 +16,11 @@
 #if defined(WEIGHT_DESKTOP)
 #include <GLFW/glfw3.h>
 #elif defined(WEIGHT_ANDROID)
+#include <cstdint>
+#include <WeightEngine/android_wrappers/android_util_functions.h>
 #include <WeightEngine/android_wrappers/android_structs.h>
 #include <WeightEngine/android_wrappers/android_native_app_glue.h>
+#include <android/sensor.h>
 #endif
 
 #define GET_EVENT(type, x) static_cast<type*>(x.get())
@@ -50,6 +53,12 @@ namespace Weight{
     inline MouseScrollEvent(int _type, double _xoffset, double _yoffset):Event(_type), xoffset(_xoffset), yoffset(_yoffset){}
   };
 
+  struct WEIGHT_API TouchEvent:Event{
+    float x, y;
+    int action;
+    inline TouchEvent(int _type, float _x, float _y, int _action):Event(_type), x(_x), y(_y), action(_action){}
+  };
+
   struct WEIGHT_API Gamepad{
     int id;
     unsigned char buttons[15];
@@ -61,35 +70,52 @@ namespace Weight{
   class WEIGHT_API EventSystem{
   private:
     std::vector<std::unique_ptr<Event>> _events;
-    double* _mouse_pos;
     Weight::Window* window;
     Weight::RenderEngine::GUI::GUIRenderer* gui_renderer;
     float* zoom_level;
+
+    #if defined(WEIGHT_DESKTOP)
+    double* _mouse_pos;
 
     std::function<void(KeyEvent*)> on_key_press;
     std::function<void(MousePressEvent*)> on_mouse_press;
     std::function<void(MouseScrollEvent*)> on_mouse_scroll;
     std::function<void(Gamepad*)> on_gamepad_event;
+    #elif defined(WEIGHT_MOBILE)
+    Weight::Vector3D accelerometer_values;
+    accelerom
+    std::function<void(TouchEvent*)> on_touch;
+    #endif
 
     std::vector<Gamepad*> connected_gamepads;
   public:
+    #if defined(WEIGHT_DESKTOP)
     EventSystem(std::function<void(KeyEvent*)> _on_key_press, std::function<void(MousePressEvent*)>_on_mouse_press, std::function<void(MouseScrollEvent*)>_on_mouse_scroll, std::function<void(Gamepad*)> _on_gamepad_event);
+    #elif defined(WEIGHT_MOBILE)
+    EventSystem(std::function<void(TouchEvent*)> _on_touch);
+    #endif
     ~EventSystem();
 
     void update();
     std::vector<std::unique_ptr<Event>> get_events();
+
+    #ifdef WEIGHT_DESKTOP
     Weight::Position2D get_mouse_pos();
-
     int get_key_state(int key);
-
     bool check_modifier(int modifier, int var);
+    #endif
 
     void _setup(Weight::RenderEngine::GUI::GUIRenderer* _gui_renderer, float* _zoom_level);
 
     #ifdef WEIGHT_ANDROID
-    void _handle_android_input(android_app* app, AInputEvent* event);
+    int32_t _handle_android_input(android_app* app, AInputEvent* event);
+    void _setup_android_sensors(Weight::Android::WeightState* weight_engine);
+    void _check_android_sensors(Weight::Android::WeightState* weight_engine);
+
+    Weight::Vector3D get_accelerometer();
     #endif
   private:
+    #ifdef WEIGHT_DESKTOP
     void _key_callback(int key, int action, int modifiers);
     void _key_callback_gui(int key, int action, int modifiers);
 
@@ -101,6 +127,7 @@ namespace Weight{
 
     void _cursor_pos_callback(double xpos, double ypos);
     void _gamepad_callback(int jid, int event);
+    #endif
 
     inline void set_window(Weight::Window* _window){window=_window;}
 

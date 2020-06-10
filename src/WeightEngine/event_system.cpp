@@ -9,6 +9,7 @@ using namespace GUI;
 using namespace Android;
 #endif
 
+#if defined(WEIGHT_DESKTOP)
 EventSystem::EventSystem(std::function<void(KeyEvent*)> _on_key_press, std::function<void(MousePressEvent*)>_on_mouse_press, std::function<void(MouseScrollEvent*)>_on_mouse_scroll, std::function<void(Gamepad*)> _on_gamepad_event){
   _mouse_pos=new double[2];
   on_key_press=_on_key_press;
@@ -16,7 +17,6 @@ EventSystem::EventSystem(std::function<void(KeyEvent*)> _on_key_press, std::func
   on_mouse_scroll=_on_mouse_scroll;
   on_gamepad_event=_on_gamepad_event;
 
-  #ifdef WEIGHT_DESKTOP
   glfwUpdateGamepadMappings(Utils::load_file("WeightEngineResources/gamepad_mappings/default_mappings.txt").c_str());
   for(int i=0; i<GAMEPAD_LAST; i++){
     if(glfwJoystickPresent(i)){
@@ -27,9 +27,14 @@ EventSystem::EventSystem(std::function<void(KeyEvent*)> _on_key_press, std::func
       }
     }
   }
-  #endif
+
   WEIGHT_SUCCESS("Event System initialised");
 }
+#elif defined(WEIGHT_MOBILE)
+EventSystem(std::function<void(TouchEvent*)> _on_touch){
+  on_touch=_on_touch;
+}
+#endif
 
 EventSystem::~EventSystem(){
 
@@ -48,6 +53,7 @@ std::vector<std::unique_ptr<Event>> EventSystem::get_events(){
   return result;
 }
 
+#ifdef WEIGHT_DESKTOP
 Position2D EventSystem::get_mouse_pos(){
   double* result=new double[2];
   int* window_dimensions=this->window->get_size();
@@ -61,9 +67,7 @@ Position2D EventSystem::get_mouse_pos(){
 }
 
 int EventSystem::get_key_state(int key){
-  #ifdef WEIGHT_DESKTOP
   return glfwGetKey(this->window->_window, key);
-  #endif
 }
 
 bool EventSystem::check_modifier(int modifier, int var){
@@ -74,6 +78,7 @@ bool EventSystem::check_modifier(int modifier, int var){
   }
   return false;
 }
+#endif
 
 void EventSystem::_setup(GUIRenderer* _gui_renderer, float* _zoom_level){
   gui_renderer=_gui_renderer;
@@ -81,12 +86,55 @@ void EventSystem::_setup(GUIRenderer* _gui_renderer, float* _zoom_level){
 }
 
 #ifdef WEIGHT_ANDROID
-void EventSystem::_handle_android_input(android_app* app, AInputEvent* event){
+int32_t EventSystem::_handle_android_input(android_app* app, AInputEvent* event){
   WeightState* weight_engine=(WeightState*)app->userData;
-  
+  int32_t type=AInputEvent_getType(event);
+  float x, y;
+  int action;
+  if(type==AINPUT_EVENT_TYPE_MOTION){
+    switch(AInputEvent_getSource(event)){
+      case AINPUT_SOURCE_TOUCHSCREEN:
+        action=AKeyEvent_getAction(event)&AMOTION_EVENT_ACTION_MASK;
+        _events.push_back(spdlog::details::make_unique<TouchEvent>(TOUCH, x, y, action));
+        on_touch(GET_EVENT(KeyEvent, spdlog::details::make_unique<TouchEvent>(TOUCH, x, y, action)));
+    }
+  }
+  return 0;
 }
+
+void EventSystem::_setup_android_sensors(WeightState* weight_engine){
+  engine->sensor_manager=AcquireASensorManagerInstance(engine->app);
+  engine->accelerometer=ASensorManager_getDefaultSensor(engine->sensor_manager, ASENSOR_TYPE_ACCELEROMETER);
+  engine->sensor_event_queue=ASensorManager_createEventQueue(engine->sensor_manager, engine->app->looper, LOOPER_ID_USER, nullptr, nullptr);
+}
+
+void EventSystem::_check_android_sensors(WeightState* weight_engine){
+  int ident;
+  int events;
+  android_poll_source* source;
+  ASensorEvent event;
+
+  while((ident=ALooper_pollAll(0, nullptr, &events, (void**)&source))>=0){
+    if(source!=nullptr){
+      source->process(state, source);
+    }
+    if(ident==LOOPER_ID_USER){
+      if(engine->accelerometer!=nullptr){
+        while(ASensorEventQueue_getEvents(engine->sensor_event_queue, &event, 1)>0){
+          accelerometer_values={event.acceleration.x, event.acceleration.y, event.acceleration.z};
+        }
+      }
+    }
+  }
+}
+
+Vector3D EventSystem::get_accelerometer(){
+  return accelerometer_values;
+}
+
 #endif
 
+#ifdef WEIGHT_DESKTOP
 void EventSystem::_key_callback(int key, int action, int modifiers){
   std::thread t(&EventSystem::_key_callback_gui, this, key, action, modifiers);
   _events.push_back(spdlog::details::make_unique<KeyEvent>(KEY, key, action, modifiers));
@@ -130,7 +178,6 @@ void EventSystem::_cursor_pos_callback(double xpos, double ypos){
 
 
 void EventSystem::_gamepad_callback(int jid, int event){
-  #ifdef WEIGHT_DESKTOP
   if(event==GAMEPAD_CONNECTED){
     if(glfwJoystickIsGamepad(jid)){
       Gamepad* gamepad=new Gamepad;
@@ -145,6 +192,5 @@ void EventSystem::_gamepad_callback(int jid, int event){
       }
     }
   }
-  #else
-  #endif
 }
+#endif

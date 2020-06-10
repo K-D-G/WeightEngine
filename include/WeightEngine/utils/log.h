@@ -2,6 +2,7 @@
 #define WEIGHT_ENGINE__UTILS__LOG_H
 #include <memory>
 #include <string>
+#include <WeightEngine/core.h>
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 

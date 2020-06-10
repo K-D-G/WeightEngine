@@ -3,7 +3,7 @@
 using namespace Weight;
 
 #ifdef WEIGHT_DESKTOP
-Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system):_title(title), _width(width), _height(height), _icon_path(icon_path), _should_close(false), _has_focus(true), _camera(camera), _event_system(event_system){
+Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system):_title(title), _width(width), _height(height), _icon_path(icon_path), _has_focus(true), _camera(camera), _event_system(event_system){
   if(!glfwInit()){
     WEIGHT_ERROR("GLFW WILL NOT INITIALISE");
     this->Window::~Window();
@@ -87,7 +87,7 @@ Window::Window(std::string title, int* width, int* height, std::string icon_path
   WEIGHT_SUCCESS("Window initialised");
 }
 #elif defined(WEIGHT_ANDROID)
-Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_engine):_title(title), _width(width), _height(height), _icon_path(icon_path), _camera(camera), _event_system(event_system), weight_engine(_weight_engine){
+Window::Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_engine):_title(title), _width(width), _height(height), _should_close(false), _icon_path(icon_path), _camera(camera), _event_system(event_system), weight_engine(_weight_engine){
   const EGLint attribs[]={
     EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
     EGL_BLUE_SIZE, 8,
@@ -213,7 +213,7 @@ void Window::close(){
   #endif
 }
 
-bool Window::set_has_focus(bool val){
+void Window::set_has_focus(bool val){
   _has_focus=val;
 }
 
