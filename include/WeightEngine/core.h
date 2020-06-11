@@ -42,12 +42,22 @@
 #elif defined(WEIGHT_IOS)
 #endif
 #define MAX_TEXTURES GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS
+
+#if defined(WEIGHT_DESKTOP)
 #define MAX_PARTICLES 10000
 #define MAX_QUADS 100000
 #define MAX_CHARS 10000
 #define MAX_WIDGETS 10000
 #define MAX_LIGHTS 100000
 #define NUMBER_FONT_CHARS 256
+#elif defined(WEIGHT_MOBILE)
+#define MAX_PARTICLES 5000
+#define MAX_QUADS 50000
+#define MAX_CHARS 5000
+#define MAX_WIDGETS 5000
+#define MAX_LIGHTS 50000
+#define NUMBER_FONT_CHARS 256
+#endif
 
 //Macros
 #define CHECK_BIT(val, pos) ((val)&(1<<(pos)))
