@@ -3,8 +3,10 @@
 #include <WeightEngine/core.h>
 #include <WeightEngine/utils/log.h>
 
-#ifdef WEIGHT_USE_GLFW
+#if defined(WEIGHT_DESKTOP)
 #include <GLFW/glfw3.h>
+#elif defined(WEIGHT_ANDROID)
+#include <time.h>
 #endif
 
 namespace Weight{
