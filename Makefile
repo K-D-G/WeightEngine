@@ -14,6 +14,7 @@ objects=obj/WeightEngine/utils/log.o \
 				obj/WeightEngine/audio/source.o \
 				obj/WeightEngine/audio/music_manager.o \
 				obj/WeightEngine/audio/dialogue.o \
+				obj/WeightEngine/render_engine/frame_buffer.o \
 				obj/WeightEngine/render_engine/shader.o \
 				obj/WeightEngine/render_engine/shaders/basic_shader.o \
 				obj/WeightEngine/render_engine/shaders/Particle2D_shader.o \

@@ -36,6 +36,7 @@
 
 #include <WeightEngine/render_engine/vertex.h>
 #include <WeightEngine/render_engine/shader.h>
+#include <WeightEngine/render_engine/frame_buffer.h>
 #include <WeightEngine/render_engine/font.h>
 #include <WeightEngine/render_engine/texture_atlas.h>
 #include <WeightEngine/render_engine/scene_manager.h>
