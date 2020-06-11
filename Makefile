@@ -1,5 +1,5 @@
 BUILD_TYPE_FLAG=WEIGHT_DEBUG #Or WEIGHT_DISTRIBUTE
-GPPPARAMS=-g -std=c++11 -D $(BUILD_TYPE_FLAG) -Iinclude -Iinclude/WeightEngine/external_libraries -Wno-macro-redefined -Wno-deprecated-declarations -Wno-null-conversion -Wno-deprecated-declarations
+GPPPARAMS=-g -O3 -std=c++11 -D $(BUILD_TYPE_FLAG) -Iinclude -Iinclude/WeightEngine/external_libraries -Wno-macro-redefined -Wno-deprecated-declarations -Wno-null-conversion -Wno-deprecated-declarations
 objects=obj/WeightEngine/utils/log.o \
 				obj/WeightEngine/utils/utils.o \
 				obj/WeightEngine/utils/maths_utils.o \
@@ -93,7 +93,7 @@ obj/%.o: src/%.cpp
 
 obj/%.o: src/%.c
 	mkdir -p $(@D)
-	gcc -g -Iinclude -Iinclude/WeightEngine/external_libraries -Iinclude/WeightEngine/external_libraries/FreeType -Wno-macro-redefined -Wno-deprecated-declarations -Wno-null-conversion -o $@ -c $<
+	gcc -g -O3 -Iinclude -Iinclude/WeightEngine/external_libraries -Iinclude/WeightEngine/external_libraries/FreeType -Wno-macro-redefined -Wno-deprecated-declarations -Wno-null-conversion -o $@ -c $<
 
 #Compiling static library on OSX: https://stackoverflow.com/questions/47656942/how-to-build-a-portable-static-c-library-for-macos
 external_libraries:$(external_objects)
