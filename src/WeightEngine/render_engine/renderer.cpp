@@ -12,7 +12,7 @@ Renderer::Renderer(int* width, int* height, Colour background_colour, Orthograph
     set_background_image(background_path);
   }
 
-  #if defined(WEIGHT_DEBUG) && !defined(__APPLE__)
+  #if defined(WEIGHT_DEBUG) && !defined(WEIGHT_MAC)
   GLint flags;
   glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
   if(flags&GL_CONTEXT_FLAG_DEBUG_BIT){
@@ -30,7 +30,7 @@ Renderer::Renderer(int* width, int* height, Colour background_colour, Orthograph
   gui_renderer=new GUIRenderer(MAX_WIDGETS, Renderer_2D, text_renderer);
   AudioUtils::set_subtitling_renderer(text_renderer);
 
-  #ifdef __APPLE__
+  #ifdef WEIGHT_MAC
   //For some reason OpenGL crashes on Apple without setting up a VAO at the start
   unsigned int vao;
   glGenVertexArrays(1, &vao);

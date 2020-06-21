@@ -219,7 +219,7 @@ void Window::set_has_focus(bool val){
 
 
 
-int* Window::get_framebuffer(){
+int* Window::get_framebuffer_size(){
   #if defined(WEIGHT_DESKTOP)
   int* result=new int[2];
   glfwGetFramebufferSize(_window, &result[0], &result[1]);

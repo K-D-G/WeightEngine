@@ -51,5 +51,4 @@
 #include <WeightEngine/Application.h>
 #include <WeightEngine/entrypoint.h>
 
-
 #endif

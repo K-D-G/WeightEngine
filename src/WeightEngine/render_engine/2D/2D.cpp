@@ -279,7 +279,7 @@ void Renderer2D::render(glm::mat4 mvp, float ts){
       geometry[i]->vertices[j].texture_slot=opengl_texture_id;
       vertices.push_back(geometry[i]->vertices[j]);
     }
-    if(number_textures+1==MAX_TEXTURES||i==geometry.size()-1){
+    if(number_textures+1==MAX_TEXTURES||i+1==geometry.size()){
       glBindVertexArray(vertex_array);
       glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
       glBufferSubData(GL_ARRAY_BUFFER, 0, vertices.size()*sizeof(Vertex), vertices.data());

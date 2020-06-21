@@ -73,6 +73,7 @@ void Application::run(){
   WEIGHT_LOG("Weight engine initialising...");
   WEIGHT_SUCCESS("SPD Log initialised");
 
+  #if defined(WEIGHT_DESKTOP)
   std::function<void(KeyEvent*)> e=[=](KeyEvent* k){
     this->on_key_press(k);
   };
@@ -90,6 +91,12 @@ void Application::run(){
   };
 
   event_system=new EventSystem(e, e2, e3, e4);
+  #elif defined(WEIGHT_IOS)
+  std::function<void(TouchEvent*)> e=[=](TouchEvent* t){
+    this->on_touch(t);
+  }
+  event_system=new EventSystem(e);
+  #endif
 
   camera=new OrthographicCameraController((float)(*(_width))/(float)(*(_height)), event_system, _width, _height);
 

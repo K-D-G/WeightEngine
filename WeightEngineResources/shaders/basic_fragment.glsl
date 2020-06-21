@@ -13,6 +13,6 @@ void main(){
   if(texture_index==0.0f){
     output_colour=colour;
   }else{
-    output_colour=texture(textures[1], texture_coords);
+    output_colour=texture(textures[int(texture_index)], texture_coords);
   }
 }

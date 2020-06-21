@@ -3,10 +3,6 @@
 #include <WeightEngine/core.h>
 #include <WeightEngine/Application.h>
 
-namespace Weight{
-  extern Weight::Application* create_application();
-}
-
 #if defined(WEIGHT_DESKTOP)
 
 int main(){
@@ -45,8 +41,17 @@ void android_main(android_app* state){
   app->run(weight_engine_pointer);
   delete app;
 }
-
 #elif defined(WEIGHT_IOS)
+#import <UIKit/UIKit.h>
+#import <WeightEngine/ios_wrappers/AppDelegate.h>
+
+int main(int argc, char* argv[]){
+  NSString* app_delegate_class_name;
+  @autoreleasepool{
+    app_delegate_class_name=NSStringFromClass([AppDelegate class]);
+  }
+  return UIApplicationMain(argc, argv, nil, app_delegate_class_name);
+}
 
 #endif
 

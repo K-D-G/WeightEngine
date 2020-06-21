@@ -23,6 +23,10 @@
 #include <WeightEngine/android_wrappers/android_structs.h>
 #endif
 
+
+#ifdef WEIGHT_IOS
+#include <WeightEngine/ios_wrappers/Application.h>
+#else
 namespace Weight{
   class WEIGHT_API Application{
     friend class Window;
@@ -77,7 +81,10 @@ namespace Weight{
     #endif
 
   };
+
+  extern Weight::Application* create_application();
 }
+#endif
 
 
 #endif

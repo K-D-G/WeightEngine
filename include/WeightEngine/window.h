@@ -62,7 +62,7 @@ namespace Weight{
     void set_has_focus(bool val);
     void close();
 
-    int* get_framebuffer();
+    int* get_framebuffer_size();
     int* get_size();
 
     #ifdef WEIGHT_DESKTOP

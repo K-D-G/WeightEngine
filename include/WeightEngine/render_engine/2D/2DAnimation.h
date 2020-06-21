@@ -3,6 +3,7 @@
 #include <WeightEngine/core.h>
 #include <WeightEngine/utils/log.h>
 #include <WeightEngine/utils/utils.h>
+#include <WeightEngine/utils/maths_utils.h>
 #include <WeightEngine/utils/time.h>
 #include <WeightEngine/render_engine/texture_atlas.h>
 
@@ -16,8 +17,11 @@ namespace Weight{
   namespace RenderEngine{
     class WEIGHT_API Animation2D{
     private:
-      Weight::RenderEngine::TextureAtlas* texture_atlas;
+      unsigned int texture_id;
+      Weight::RenderEngine::SubTexture* frame;
+
       json animation_data;
+      int width, height;
 
       //For current animation
       bool play;
@@ -25,7 +29,9 @@ namespace Weight{
       int frame_number;
       int frame_count;
       int start_tile;
+      std::string frame_name;
       std::string current_animation;
+      std::string name;
 
       float frame_step; //Time between showing each frame
       float time_accumulation; //Tracking time so we know when to show each frame
@@ -34,7 +40,7 @@ namespace Weight{
       ~Animation2D();
 
       void reload_animations(std::string texture_path, std::string details_path);
-      void play_animation(std::string name, int frame_start=0, bool _loop=false);
+      void play_animation(std::string _name, int frame_start=0, bool _loop=false);
       void stop_animation();
 
       Weight::RenderEngine::SubTexture* update();

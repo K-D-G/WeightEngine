@@ -18,6 +18,7 @@
   #include <EGL/egl.h>
   #include <GLES/gl.h>
 #elif defined(WEIGHT_IOS)
+  #include <MTLPP/mtlpp.hpp>
 #endif
 
 #include <string>
