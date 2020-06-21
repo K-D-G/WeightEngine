@@ -2,6 +2,10 @@
 #Such as listing all of the files in subdirectories in order to add them to the makefile
 import os
 
+def add_prefix(file_list, other_extension):
+    for i in file_list:
+        print('WeightEngine/external_libraries/'+other_extension+i)
+
 def list_files(root, return_arr=False):
     arr=[]
     for path, subdirs, files in os.walk(root):
