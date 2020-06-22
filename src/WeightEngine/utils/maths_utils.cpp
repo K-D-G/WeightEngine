@@ -1,6 +1,6 @@
 #include <WeightEngine/utils/maths_utils.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 
 float Maths::map(float n, float start, float stop, float start2, float stop2, bool constrain){
   float result=(n-start)/(stop-start)*(stop2-start2)+start2;

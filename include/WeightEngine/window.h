@@ -25,9 +25,9 @@
 #include <string>
 #include <functional>
 
-namespace Weight{
+namespace WeightEngine{
   class WEIGHT_API Window{
-    friend class Weight::EventSystem;
+    friend class WeightEngine::EventSystem;
   private:
     #if defined(WEIGHT_DESKTOP)
     GLFWwindow* _window;
@@ -37,7 +37,7 @@ namespace Weight{
 
     window_data data;
     #elif defined(WEIGHT_ANDROID)
-    Weight::Android::WeightState* weight_engine;
+    WeightEngine::Android::WeightState* weight_engine;
     bool _should_close;
     #endif
     int* _width;
@@ -46,13 +46,13 @@ namespace Weight{
     bool _has_focus;
 
     std::string _title;
-    Weight::RenderEngine::OrthographicCameraController* _camera;
-    Weight::EventSystem* _event_system;
+    WeightEngine::RenderEngine::OrthographicCameraController* _camera;
+    WeightEngine::EventSystem* _event_system;
   public:
     #if defined(WEIGHT_DESKTOP)
-    Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system);
+    Window(std::string title, int* width, int* height, std::string icon_path, WeightEngine::RenderEngine::OrthographicCameraController* camera, WeightEngine::EventSystem* event_system);
     #elif defined(WEIGHT_ANDROID)
-    Window(std::string title, int* width, int* height, std::string icon_path, Weight::RenderEngine::OrthographicCameraController* camera, Weight::EventSystem* event_system, Weight::Android::WeightState* _weight_engine);
+    Window(std::string title, int* width, int* height, std::string icon_path, WeightEngine::RenderEngine::OrthographicCameraController* camera, WeightEngine::EventSystem* event_system, WeightEngine::Android::WeightState* _weight_engine);
     #endif
     ~Window();
 

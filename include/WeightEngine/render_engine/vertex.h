@@ -4,12 +4,12 @@
 #include <WeightEngine/utils/log.h>
 #include <WeightEngine/utils/utils.h>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     struct WEIGHT_API Vertex{
-      Weight::Position3D position;
-      Weight::Colour colour;
-      Weight::Position2D texture_coords;
+      WeightEngine::Position3D position;
+      WeightEngine::Colour colour;
+      WeightEngine::Position2D texture_coords;
       float texture_slot; //Texture slot
       float affect_mvp;
     };

@@ -8,11 +8,11 @@
 #include <string>
 #include <map>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API SceneManager{
     public:
-      std::map<std::string, Weight::RenderEngine::Scene*> scenes;
+      std::map<std::string, WeightEngine::RenderEngine::Scene*> scenes;
       std::string current_scene;
     public:
       SceneManager();

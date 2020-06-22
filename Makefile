@@ -139,12 +139,15 @@ update_shaders:
 	cp -r WeightEngineResources WeightEngineTest/WeightEngineResources
 
 test_file:
-	g++ -std=c++11 -Iinclude -Iinclude/WeightEngine/external_libraries -Wno-macro-redefined -Wno-deprecated-declarations -Wno-null-conversion -Wno-deprecated-declarations -Lsrc/WeightEngine/external_libraries -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit test_file.cpp -o test_file && ./test_file
+	g++ -std=c++11 -Iinclude -Iinclude/WeightEngine/external_libraries -Wno-macro-redefined -Wno-deprecated-declarations -Wno-null-conversion -Wno-deprecated-declarations -Lsrc/WeightEngine/external_libraries -lexternal_libraries -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit test_file.cpp -o test_file && ./test_file
 	rm -rf test_file
 
 commit:
 	git add .
 	git commit -m "$(m)"
+	git push origin master
+
+push:
 	git push origin master
 
 .PHONY: clean

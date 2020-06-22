@@ -10,23 +10,23 @@
 
 #include <string>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     namespace GUI{
       class WEIGHT_API Label:public Widget{
       public:
-        Weight::RenderEngine::Text* instance;
+        WeightEngine::RenderEngine::Text* instance;
         std::string text;
-        Weight::Position2D pos;
-        Weight::RenderEngine::Font* font;
-        Weight::Colour colour;
+        WeightEngine::Position2D pos;
+        WeightEngine::RenderEngine::Font* font;
+        WeightEngine::Colour colour;
         float size;
       public:
-        Label(std::string _text, Weight::Position2D _pos, Weight::RenderEngine::Font* _font, Weight::Colour _colour, float _size);
+        Label(std::string _text, WeightEngine::Position2D _pos, WeightEngine::RenderEngine::Font* _font, WeightEngine::Colour _colour, float _size);
         ~Label();
 
-        void set_position(Weight::Position2D _pos);
-        void set_colour(Weight::Colour _colour);
+        void set_position(WeightEngine::Position2D _pos);
+        void set_colour(WeightEngine::Colour _colour);
         void set_size(float _size);
         void rotate(float _degrees);
 

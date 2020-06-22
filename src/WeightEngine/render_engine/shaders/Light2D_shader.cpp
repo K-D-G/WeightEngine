@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/shaders/Light2D_shader.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 Light2DShader* Light2DShader::instance=0;

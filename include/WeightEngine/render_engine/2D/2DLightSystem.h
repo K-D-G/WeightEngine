@@ -19,7 +19,7 @@
 #endif
 #include <glm/glm.hpp>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API LightSystem2D{
     private:
@@ -31,16 +31,16 @@ namespace Weight{
       unsigned int max_vertex;
       unsigned int max_index;
     public:
-      std::vector<Weight::RenderEngine::Light2D*> lights;
+      std::vector<WeightEngine::RenderEngine::Light2D*> lights;
 
       LightSystem2D(unsigned int _max_lights);
       ~LightSystem2D();
 
-      Weight::RenderEngine::Light2D* create_light(Weight::Position2D position, Weight::Colour colour, float size, bool affect_mvp=true);
+      WeightEngine::RenderEngine::Light2D* create_light(WeightEngine::Position2D position, WeightEngine::Colour colour, float size, bool affect_mvp=true);
 
       void render(glm::mat4 mvp, float ts);
-      void submit(Weight::RenderEngine::Light2D* l);
-      void remove(Weight::RenderEngine::Light2D* l);
+      void submit(WeightEngine::RenderEngine::Light2D* l);
+      void remove(WeightEngine::RenderEngine::Light2D* l);
     };
   }
 }

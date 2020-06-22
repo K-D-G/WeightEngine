@@ -8,7 +8,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glad/glad.h>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API OrthographicCamera{
     private:

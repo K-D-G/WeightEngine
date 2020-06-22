@@ -13,12 +13,12 @@
 
 using json=nlohmann::json;
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API Animation2D{
     private:
       unsigned int texture_id;
-      Weight::RenderEngine::SubTexture* frame;
+      WeightEngine::RenderEngine::SubTexture* frame;
 
       json animation_data;
       int width, height;
@@ -43,7 +43,7 @@ namespace Weight{
       void play_animation(std::string _name, int frame_start=0, bool _loop=false);
       void stop_animation();
 
-      Weight::RenderEngine::SubTexture* update();
+      WeightEngine::RenderEngine::SubTexture* update();
 
     };
   }

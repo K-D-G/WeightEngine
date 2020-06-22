@@ -1,6 +1,6 @@
 #include <WeightEngine/Application.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 #ifdef WEIGHT_ANDROID

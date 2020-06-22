@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/shaders/text_shader.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 TextShader* TextShader::instance=0;

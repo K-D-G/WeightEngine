@@ -8,7 +8,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     //Using a singleton because this shouldn't be duplicated as the renderer creates it
     //automatically as it does basic stuff

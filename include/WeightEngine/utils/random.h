@@ -4,7 +4,7 @@
 #include <random>
 
 //Based of cherno's design
-namespace Weight{
+namespace WeightEngine{
   class WEIGHT_API Random{
   private:
     static std::mt19937 random_engine;

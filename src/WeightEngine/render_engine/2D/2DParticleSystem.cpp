@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/2D/2DParticleSystem.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 ParticleSystem2D::ParticleSystem2D(unsigned int _max_particles):max_particles(_max_particles), max_index(_max_particles*6){

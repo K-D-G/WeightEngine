@@ -1,6 +1,6 @@
 #include <WeightEngine/audio/source.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace Audio;
 
 Source::Source(unsigned int buffer, bool music):_music(music){

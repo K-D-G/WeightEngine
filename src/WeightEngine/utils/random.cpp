@@ -1,6 +1,6 @@
 #include <WeightEngine/utils/random.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 
 std::mt19937 Random::random_engine;
 std::uniform_int_distribution<std::mt19937::result_type> Random::distribution;

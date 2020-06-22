@@ -1,6 +1,6 @@
 #include <WeightEngine/utils/time.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 
 Time* Time::instance=0;
 

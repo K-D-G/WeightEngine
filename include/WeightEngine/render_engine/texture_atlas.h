@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     struct WEIGHT_API SubTexture{
       unsigned int texture_id;

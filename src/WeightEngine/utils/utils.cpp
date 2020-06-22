@@ -1,6 +1,6 @@
 #include <WeightEngine/utils/utils.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 
 Colour COLOURS::RED={1.0f, 0.0f, 0.0f, 1.0f};
 Colour COLOURS::GREEN={0.0f, 1.0f, 0.0f, 1.0f};

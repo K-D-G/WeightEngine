@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/scene_manager.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 SceneManager::SceneManager(){

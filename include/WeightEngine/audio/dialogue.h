@@ -15,7 +15,7 @@
 #include <thread>
 
 
-namespace Weight{
+namespace WeightEngine{
   namespace Audio{
     struct WEIGHT_API DialogueSegment{
       float start_time;
@@ -23,7 +23,7 @@ namespace Weight{
       float end_time;
       float volume;
     };
-    class WEIGHT_API Dialogue:public Weight::Audio::Source{
+    class WEIGHT_API Dialogue:public WeightEngine::Audio::Source{
     private:
       std::vector<DialogueSegment> dialogue_segments;
       AudioUtils::SubtitlingSettings* subtitle_settings;

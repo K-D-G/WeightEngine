@@ -2,7 +2,7 @@
 #define WEIGHT_ENGINE__UTILS__MATHS_UTILS_H
 #include <WeightEngine/core.h>
 
-namespace Weight{
+namespace WeightEngine{
   class WEIGHT_API Maths{
   public:
     //Help from p5.js

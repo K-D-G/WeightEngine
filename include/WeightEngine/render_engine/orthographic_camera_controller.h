@@ -9,14 +9,14 @@
 #include <glm/glm.hpp>
 #include <algorithm>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API OrthographicCameraController{
     public:
       float aspect_ratio;
       float* zoom_level=new float(1.0f);
-      Weight::EventSystem* event_system;
-      Weight::RenderEngine::OrthographicCamera* camera;
+      WeightEngine::EventSystem* event_system;
+      WeightEngine::RenderEngine::OrthographicCamera* camera;
 
       glm::vec3 camera_position=glm::vec3(0, 0, 0);
       float camera_rotation=0.0f;
@@ -28,7 +28,7 @@ namespace Weight{
 
       void on_update(float ts);
 
-      void on_mouse_scroll(Weight::MouseScrollEvent* mse);
+      void on_mouse_scroll(WeightEngine::MouseScrollEvent* mse);
       void on_window_resize(int width, int height);
 
       OrthographicCamera* get_camera();

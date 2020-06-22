@@ -21,26 +21,26 @@
 #endif
 #include <glm/glm.hpp>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     namespace GUI{
       class WEIGHT_API Widget;
 
       class WEIGHT_API GUIRenderer{
       public:
-        std::vector<Weight::RenderEngine::GUI::Widget*> geometry;
+        std::vector<WeightEngine::RenderEngine::GUI::Widget*> geometry;
       private:
         int id_number;
         int max_widgets;
-        Weight::RenderEngine::Renderer2D* Renderer_2D;
-        Weight::RenderEngine::TextRenderer* text_renderer;
+        WeightEngine::RenderEngine::Renderer2D* Renderer_2D;
+        WeightEngine::RenderEngine::TextRenderer* text_renderer;
       public:
-        GUIRenderer(int _max_widgets, Weight::RenderEngine::Renderer2D* _Renderer_2D, Weight::RenderEngine::TextRenderer* _text_renderer);
+        GUIRenderer(int _max_widgets, WeightEngine::RenderEngine::Renderer2D* _Renderer_2D, WeightEngine::RenderEngine::TextRenderer* _text_renderer);
         ~GUIRenderer();
 
-        void setup_widget(Weight::RenderEngine::GUI::Widget* w);
-        void submit(Weight::RenderEngine::GUI::Widget* w);
-        void remove(Weight::RenderEngine::GUI::Widget* w);
+        void setup_widget(WeightEngine::RenderEngine::GUI::Widget* w);
+        void submit(WeightEngine::RenderEngine::GUI::Widget* w);
+        void remove(WeightEngine::RenderEngine::GUI::Widget* w);
         void render(float ts);
       };
     }

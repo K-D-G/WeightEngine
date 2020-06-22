@@ -25,7 +25,7 @@
 #endif
 #include <glm/glm.hpp>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     #define X_AXIS 1
     #define Y_AXIS 2
@@ -33,14 +33,14 @@ namespace Weight{
     struct WEIGHT_API QuadData{
       int id;
       unsigned int texture_id;
-      Weight::Vector2D dimensions;
-      Weight::RenderEngine::Vertex vertices[4];
-      //Weight::Position3D centre_pos;
+      WeightEngine::Vector2D dimensions;
+      WeightEngine::RenderEngine::Vertex vertices[4];
+      //WeightEngine::Position3D centre_pos;
 
-      void move(Weight::Position3D translation);
-      void move(Weight::Position2D translation);
-      void set_position(Weight::Position3D position);
-      void set_position(Weight::Position2D position);
+      void move(WeightEngine::Position3D translation);
+      void move(WeightEngine::Position2D translation);
+      void set_position(WeightEngine::Position3D position);
+      void set_position(WeightEngine::Position2D position);
       void set_size(float width, float height);
 
       void rotate(float degrees);
@@ -48,9 +48,9 @@ namespace Weight{
       void scale(float factor);
 
       void set_texture(std::string path);
-      void set_texture_from_atlas(Weight::RenderEngine::SubTexture* texture);
+      void set_texture_from_atlas(WeightEngine::RenderEngine::SubTexture* texture);
 
-      void fill(Weight::Colour colour);
+      void fill(WeightEngine::Colour colour);
       inline void no_fill(){fill({0.0f, 0.0f, 0.0f, 0.0f});}
     };
 
@@ -73,11 +73,11 @@ namespace Weight{
       Renderer2D(int _max_quad);
       ~Renderer2D();
 
-      QuadData* create_quad(Weight::Position2D position, float width, float height, Weight::Colour colour, bool affect_mvp=true);
-      QuadData* create_quad(Weight::Position2D position, float width, float height, std::string texture_path, bool affect_mvp=true);
+      QuadData* create_quad(WeightEngine::Position2D position, float width, float height, WeightEngine::Colour colour, bool affect_mvp=true);
+      QuadData* create_quad(WeightEngine::Position2D position, float width, float height, std::string texture_path, bool affect_mvp=true);
 
-      QuadData* create_quad(Weight::Position3D position, float width, float height, Weight::Colour colour, bool affect_mvp=true);
-      QuadData* create_quad(Weight::Position3D position, float width, float height, std::string texture_path, bool affect_mvp=true);
+      QuadData* create_quad(WeightEngine::Position3D position, float width, float height, WeightEngine::Colour colour, bool affect_mvp=true);
+      QuadData* create_quad(WeightEngine::Position3D position, float width, float height, std::string texture_path, bool affect_mvp=true);
 
       void submit(QuadData* q);
       void remove(QuadData* q);

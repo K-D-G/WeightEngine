@@ -1,6 +1,6 @@
 #include <WeightEngine/audio/listener.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace Audio;
 
 Listener::Listener(float x, float y, float z){

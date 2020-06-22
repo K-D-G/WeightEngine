@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/2D/2DLight.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 Light2D::Light2D(Position2D _position, Colour _colour, float _size, bool _affect_mvp){

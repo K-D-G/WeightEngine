@@ -25,7 +25,7 @@
 
 #define GET_EVENT(type, x) static_cast<type*>(x.get())
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{namespace GUI{class WEIGHT_API GUIRenderer;}}
   struct WEIGHT_API Event{
     int type;
@@ -43,8 +43,8 @@ namespace Weight{
     int button;
     int action;
     int modifiers;
-    Weight::Position2D mouse_position;
-    inline MousePressEvent(int _type, int _button, int _action, int _modifiers, Weight::Position2D _mouse_pos):Event(_type), button(_button), action(_action), modifiers(_modifiers), mouse_position(_mouse_pos){}
+    WeightEngine::Position2D mouse_position;
+    inline MousePressEvent(int _type, int _button, int _action, int _modifiers, WeightEngine::Position2D _mouse_pos):Event(_type), button(_button), action(_action), modifiers(_modifiers), mouse_position(_mouse_pos){}
   };
 
   struct WEIGHT_API MouseScrollEvent:Event{
@@ -70,8 +70,8 @@ namespace Weight{
   class WEIGHT_API EventSystem{
   private:
     std::vector<std::unique_ptr<Event>> _events;
-    Weight::Window* window;
-    Weight::RenderEngine::GUI::GUIRenderer* gui_renderer;
+    WeightEngine::Window* window;
+    WeightEngine::RenderEngine::GUI::GUIRenderer* gui_renderer;
     float* zoom_level;
 
     #if defined(WEIGHT_DESKTOP)
@@ -82,7 +82,7 @@ namespace Weight{
     std::function<void(MouseScrollEvent*)> on_mouse_scroll;
     std::function<void(Gamepad*)> on_gamepad_event;
     #elif defined(WEIGHT_MOBILE)
-    Weight::Vector3D accelerometer_values;
+    WeightEngine::Vector3D accelerometer_values;
     accelerom
     std::function<void(TouchEvent*)> on_touch;
     #endif
@@ -100,19 +100,19 @@ namespace Weight{
     std::vector<std::unique_ptr<Event>> get_events();
 
     #ifdef WEIGHT_DESKTOP
-    Weight::Position2D get_mouse_pos();
+    WeightEngine::Position2D get_mouse_pos();
     int get_key_state(int key);
     bool check_modifier(int modifier, int var);
     #endif
 
-    void _setup(Weight::RenderEngine::GUI::GUIRenderer* _gui_renderer, float* _zoom_level);
+    void _setup(WeightEngine::RenderEngine::GUI::GUIRenderer* _gui_renderer, float* _zoom_level);
 
     #ifdef WEIGHT_ANDROID
     int32_t _handle_android_input(android_app* app, AInputEvent* event);
-    void _setup_android_sensors(Weight::Android::WeightState* weight_engine);
-    void _check_android_sensors(Weight::Android::WeightState* weight_engine);
+    void _setup_android_sensors(WeightEngine::Android::WeightState* weight_engine);
+    void _check_android_sensors(WeightEngine::Android::WeightState* weight_engine);
 
-    Weight::Vector3D get_accelerometer();
+    WeightEngine::Vector3D get_accelerometer();
     #endif
   private:
     #ifdef WEIGHT_DESKTOP
@@ -129,9 +129,9 @@ namespace Weight{
     void _gamepad_callback(int jid, int event);
     #endif
 
-    inline void set_window(Weight::Window* _window){window=_window;}
+    inline void set_window(WeightEngine::Window* _window){window=_window;}
 
-    friend class Weight::Window;
+    friend class WeightEngine::Window;
   };
 }
 

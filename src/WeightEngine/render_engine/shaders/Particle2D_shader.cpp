@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/shaders/Particle2D_shader.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 Particle2DShader* Particle2DShader::instance=0;

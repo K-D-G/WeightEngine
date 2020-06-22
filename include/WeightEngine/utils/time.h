@@ -9,7 +9,7 @@
 #include <time.h>
 #endif
 
-namespace Weight{
+namespace WeightEngine{
   class WEIGHT_API Time{
   private:
     static Time* instance;

@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/orthographic_camera.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 //Submit aspect ratio

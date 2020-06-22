@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/orthographic_camera_controller.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 OrthographicCameraController::OrthographicCameraController(float _aspect_ratio, EventSystem* _event_system, int* _screen_width, int* _screen_height):aspect_ratio(_aspect_ratio), event_system(_event_system){

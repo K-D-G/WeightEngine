@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/scene.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 Scene::Scene(std::string path){

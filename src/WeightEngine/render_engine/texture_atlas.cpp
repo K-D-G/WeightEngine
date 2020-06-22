@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/texture_atlas.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 TextureAtlas::TextureAtlas(std::string texture_path, int texture_width, int texture_height){

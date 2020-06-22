@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/frame_buffer.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 Framebuffer::Framebuffer(FramebufferData* _data):data(_data){

@@ -23,21 +23,21 @@
 
 #include <string>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API Renderer{
     private:
       float* _background_colour;
       void set_background_image(std::string background_path);
     public:
-      Weight::RenderEngine::Renderer2D* Renderer_2D;
-      Weight::RenderEngine::ParticleSystem2D* particle_system;
-      Weight::RenderEngine::LightSystem2D* light_system;
-      Weight::RenderEngine::TextRenderer* text_renderer;
-      Weight::RenderEngine::GUI::GUIRenderer* gui_renderer;
+      WeightEngine::RenderEngine::Renderer2D* Renderer_2D;
+      WeightEngine::RenderEngine::ParticleSystem2D* particle_system;
+      WeightEngine::RenderEngine::LightSystem2D* light_system;
+      WeightEngine::RenderEngine::TextRenderer* text_renderer;
+      WeightEngine::RenderEngine::GUI::GUIRenderer* gui_renderer;
 
-      Weight::RenderEngine::OrthographicCameraController* camera;
-      Renderer(int* width, int* height, Colour background_colour, Weight::RenderEngine::OrthographicCameraController* _camera, std::string background_path);
+      WeightEngine::RenderEngine::OrthographicCameraController* camera;
+      Renderer(int* width, int* height, Colour background_colour, WeightEngine::RenderEngine::OrthographicCameraController* _camera, std::string background_path);
       ~Renderer();
 
       void set_background_colour(Colour background_colour);

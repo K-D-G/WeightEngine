@@ -19,7 +19,7 @@
 #include <sstream>
 #include <unordered_map>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API Shader{
     private:

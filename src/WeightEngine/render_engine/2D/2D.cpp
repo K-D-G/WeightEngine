@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/2D/2D.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 void QuadData::move(Position3D translation){
@@ -15,13 +15,13 @@ void QuadData::move(Position2D translation){
   move(arg);
 }
 
-void QuadData::set_position(Weight::Position3D position){
+void QuadData::set_position(Position3D position){
   this->vertices[0].position={position.x, position.y, position.z};
   this->vertices[1].position={position.x+dimensions.x, position.y, position.z};
   this->vertices[2].position={position.x+dimensions.x, position.y+dimensions.y, position.z};
   this->vertices[3].position={position.x, position.y+dimensions.y, position.z};
 }
-void QuadData::set_position(Weight::Position2D position){
+void QuadData::set_position(Position2D position){
   Position3D arg={position.x, position.y, 0.0f};
   set_position(arg);
 }

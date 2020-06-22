@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/gui/label.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 using namespace GUI;
 

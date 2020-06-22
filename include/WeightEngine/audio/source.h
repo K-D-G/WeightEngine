@@ -6,15 +6,15 @@
 #include <WeightEngine/utils/utils.h>
 #include <WeightEngine/utils/audio_utils.h>
 
-namespace Weight{
+namespace WeightEngine{
   namespace Audio{
     class WEIGHT_API Source{
     private:
       unsigned int id;
       unsigned int buffer_id;
 
-      Weight::Position3D position;
-      Weight::Vector3D velocity;
+      WeightEngine::Position3D position;
+      WeightEngine::Vector3D velocity;
       float volume;
       bool _music;
     public:
@@ -43,12 +43,12 @@ namespace Weight{
 
 
       //Position
-      Source& operator+=(const Weight::Position3D& rhs);
-      Source& operator-=(const Weight::Position3D& rhs);
+      Source& operator+=(const WeightEngine::Position3D& rhs);
+      Source& operator-=(const WeightEngine::Position3D& rhs);
 
       //Velocity
-      Source& operator+=(const Weight::Vector3D& rhs);
-      Source& operator-=(const Weight::Vector3D& rhs);
+      Source& operator+=(const WeightEngine::Vector3D& rhs);
+      Source& operator-=(const WeightEngine::Vector3D& rhs);
 
       //Volume
       Source& operator+=(const float vol);

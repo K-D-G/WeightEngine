@@ -16,14 +16,14 @@
 #define INVERSE_DISTANCE AL_INVERSE_DISTANCE
 #define INVERSE_DISTANCE_CLAMPED AL_INVERSE_DISTANCE_CLAMPED
 
-namespace Weight{
+namespace WeightEngine{
   class WEIGHT_API AudioUtils{
   public:
     struct SubtitlingSettings{
-      Weight::RenderEngine::TextRenderer* text_renderer;
+      WeightEngine::RenderEngine::TextRenderer* text_renderer;
       bool subtitle;
-      Weight::RenderEngine::Font* font;
-      Weight::Colour colour;
+      WeightEngine::RenderEngine::Font* font;
+      WeightEngine::Colour colour;
       float font_size;
     };
 
@@ -39,8 +39,8 @@ namespace Weight{
     static void set_volume(float v);
     static void set_music_volume(float v);
 
-    static void set_subtitling_renderer(Weight::RenderEngine::TextRenderer* text_renderer);
-    static void set_subtitling(bool subtitle, Weight::RenderEngine::Font* font=nullptr, Weight::Colour colour={0.0f, 0.0f, 0.0f, 0.0f}, float font_size=20.0f);
+    static void set_subtitling_renderer(WeightEngine::RenderEngine::TextRenderer* text_renderer);
+    static void set_subtitling(bool subtitle, WeightEngine::RenderEngine::Font* font=nullptr, WeightEngine::Colour colour={0.0f, 0.0f, 0.0f, 0.0f}, float font_size=20.0f);
     static AudioUtils::SubtitlingSettings* get_subtitling_settings();
 
     static unsigned int load_sound(std::string file);

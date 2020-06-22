@@ -13,11 +13,11 @@
 #include <unordered_map>
 
 //3D sound will only work with MONO audio and NOT STEREO
-namespace Weight{
+namespace WeightEngine{
   namespace Audio{
     class WEIGHT_API MusicManager{
     private:
-      Weight::Audio::Source* source;
+      WeightEngine::Audio::Source* source;
 
       std::unordered_map<std::string, unsigned int> music;
     public:

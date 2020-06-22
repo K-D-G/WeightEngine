@@ -1,7 +1,7 @@
 #include <WeightEngine/event_system.h>
 #include <WeightEngine/window.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 using namespace GUI;
 

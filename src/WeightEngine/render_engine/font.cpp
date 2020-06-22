@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/font.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 Font::Font(std::string font_path, int num_characters, FT_Library& lib):path(font_path), library(lib), number_characters(num_characters){

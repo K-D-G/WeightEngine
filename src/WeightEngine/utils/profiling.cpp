@@ -1,7 +1,7 @@
 #include <WeightEngine/utils/profiling.h>
 #ifdef WEIGHT_DEBUG
 
-using namespace Weight;
+using namespace WeightEngine;
 
 ProfileAggregator* ProfileAggregator::instance=0;
 ProfileAggregator* ProfileAggregator::get(){

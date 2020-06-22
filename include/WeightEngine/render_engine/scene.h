@@ -11,7 +11,7 @@
 
 using json=nlohmann::json;
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API Scene{
     private:

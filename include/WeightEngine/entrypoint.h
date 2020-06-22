@@ -6,7 +6,7 @@
 #if defined(WEIGHT_DESKTOP)
 
 int main(){
-  Weight::Application* app=Weight::create_application();
+  WeightEngine::Application* app=WeightEngine::create_application();
   app->run();
   delete app;
   return 0;
@@ -23,17 +23,17 @@ int main(){
 #include <WeightEngine/android_wrappers/android_structs.h>
 
 void android_main(android_app* state){
-  Weight::Android::WeightState weight_engine;
+  WeightEngine::Android::WeightState weight_engine;
   memset(&weight_engine, 0, sizeof(WeightState));
-  Weight::Android::WeightState* weight_engine_pointer=new Weight::Android::WeightState(weight_engine);
+  WeightEngine::Android::WeightState* weight_engine_pointer=new WeightEngine::Android::WeightState(weight_engine);
   weight_engine_pointer->app=state;
   weight_engine_pointer->app->userData=weight_engine_pointer;
 
   if(weight_engine_pointer->app->savedState!=nullptr){
-    weight_engine_pointer->state=*(Weight::Android::SavedState*)weight_engine_pointer->app->savedState;
+    weight_engine_pointer->state=*(WeightEngine::Android::SavedState*)weight_engine_pointer->app->savedState;
   }
 
-  Weight::Application* app=Weight::create_application();
+  WeightEngine::Application* app=WeightEngine::create_application();
 
   weight_engine_pointer->app->onAppCmd=app->_handle_android_cmd;
   weight_engine_pointer->app->onInputEvent=app->event_system->_handle_android_input;

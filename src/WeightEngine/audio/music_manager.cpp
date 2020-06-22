@@ -1,6 +1,6 @@
 #include <WeightEngine/audio/music_manager.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace Audio;
 
 

@@ -1,6 +1,6 @@
 #include <WeightEngine/utils/audio_utils.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 float AudioUtils::volume=1.0f;
@@ -25,7 +25,7 @@ void AudioUtils::set_subtitling_renderer(TextRenderer* text_renderer){
   subtitle_settings->text_renderer=text_renderer;
 }
 
-void AudioUtils::set_subtitling(bool subtitle, Weight::RenderEngine::Font* font, Weight::Colour colour, float font_size){
+void AudioUtils::set_subtitling(bool subtitle, Font* font, Colour colour, float font_size){
   subtitle_settings->subtitle=subtitle;
   subtitle_settings->font=font;
   subtitle_settings->colour=colour;

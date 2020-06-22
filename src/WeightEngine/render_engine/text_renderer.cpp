@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/text_renderer.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 void Text::move(Position3D translation){

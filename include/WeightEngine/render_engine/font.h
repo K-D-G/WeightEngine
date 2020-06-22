@@ -13,13 +13,13 @@
 //We are basically texture atlasing here but not using the class because the
 //texture atlas class needs fixed sized textures which we don't have here because
 //fonts
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     struct WEIGHT_API Character{
       float offset; //x offset in texture coords
-      Weight::Vector2D size;
-      Weight::Vector2D bearing;
-      Weight::Vector2D advance;
+      WeightEngine::Vector2D size;
+      WeightEngine::Vector2D bearing;
+      WeightEngine::Vector2D advance;
     };
 
     class WEIGHT_API Font{
@@ -32,7 +32,7 @@ namespace Weight{
       unsigned int texture_id;
       int number_characters;
 
-      Weight::Vector2D atlas_dimensions;
+      WeightEngine::Vector2D atlas_dimensions;
     public:
       std::vector<Character> characters;
 
@@ -44,7 +44,7 @@ namespace Weight{
       std::string get_font_path();
       unsigned int get_texture_id();
 
-      Weight::Vector2D get_atlas_dimensions();
+      WeightEngine::Vector2D get_atlas_dimensions();
     };
   }
 }

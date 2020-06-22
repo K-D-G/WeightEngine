@@ -5,27 +5,27 @@
 #include <WeightEngine/utils/utils.h>
 #include <WeightEngine/render_engine/vertex.h>
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     class WEIGHT_API Light2D{
     private:
-      Weight::Position2D position;
-      Weight::Colour colour;
+      WeightEngine::Position2D position;
+      WeightEngine::Colour colour;
       float size;
       bool affect_mvp;
     public:
-      Weight::RenderEngine::Vertex vertices[4];
+      WeightEngine::RenderEngine::Vertex vertices[4];
 
-      Light2D(Weight::Position2D _position, Weight::Colour _colour, float _size, bool _affect_mvp=true);
+      Light2D(WeightEngine::Position2D _position, WeightEngine::Colour _colour, float _size, bool _affect_mvp=true);
       ~Light2D();
 
-      void set_position(Weight::Position2D pos);
-      void move(Weight::Vector2D translation);
-      void set_colour(Weight::Colour _colour);
+      void set_position(WeightEngine::Position2D pos);
+      void move(WeightEngine::Vector2D translation);
+      void set_colour(WeightEngine::Colour _colour);
       void set_size(float _size);
 
-      Weight::Position2D get_position();
-      Weight::Colour get_colour();
+      WeightEngine::Position2D get_position();
+      WeightEngine::Colour get_colour();
       float get_size();
     };
   }

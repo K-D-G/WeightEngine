@@ -10,7 +10,7 @@
 #include <string>
 
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     namespace GUI{
       class WEIGHT_API Image:public Widget{
@@ -18,16 +18,16 @@ namespace Weight{
         std::string path;
         float width;
         float height;
-        Weight::Position2D pos;
+        WeightEngine::Position2D pos;
 
-        Weight::RenderEngine::QuadData* instance;
+        WeightEngine::RenderEngine::QuadData* instance;
       public:
-        Image(std::string _path, Weight::Position2D _pos, float _width, float _height);
+        Image(std::string _path, WeightEngine::Position2D _pos, float _width, float _height);
         ~Image();
 
         void set_texture(std::string _path);
         void set_size(float _width, float _height);
-        void set_position(Weight::Position2D _pos);
+        void set_position(WeightEngine::Position2D _pos);
 
         void on_setup() override;
       };

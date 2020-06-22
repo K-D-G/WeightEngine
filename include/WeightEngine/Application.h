@@ -27,7 +27,7 @@
 #ifdef WEIGHT_IOS
 #include <WeightEngine/ios_wrappers/Application.h>
 #else
-namespace Weight{
+namespace WeightEngine{
   class WEIGHT_API Application{
     friend class Window;
   private:
@@ -39,25 +39,25 @@ namespace Weight{
     int* _height;
 
     //Data to only be used when first running
-    Weight::Colour background_colour;
+    WeightEngine::Colour background_colour;
     std::string background_path;
     std::string icon_path;
 
     #ifdef WEIGHT_ANDROID
-    Weight::Android::WeightState* weight_engine;
+    WeightEngine::Android::WeightState* weight_engine;
     #endif
   public:
-    Weight::Window* window;
-    Weight::EventSystem* event_system;
-    Weight::RenderEngine::Renderer* renderer;
-    Weight::RenderEngine::OrthographicCameraController* camera;
-    Weight::Time* time;
+    WeightEngine::Window* window;
+    WeightEngine::EventSystem* event_system;
+    WeightEngine::RenderEngine::Renderer* renderer;
+    WeightEngine::RenderEngine::OrthographicCameraController* camera;
+    WeightEngine::Time* time;
 
-    Application(std::string app_name, int width, int height, Weight::Colour _background_colour={}, std::string _background_path="", std::string _icon_path="");
+    Application(std::string app_name, int width, int height, WeightEngine::Colour _background_colour={}, std::string _background_path="", std::string _icon_path="");
     ~Application();
 
     #ifdef WEIGHT_ANDROID
-    void run(Weight::Android::WeightState* _weight_engine);
+    void run(WeightEngine::Android::WeightState* _weight_engine);
     #else
     void run();
     #endif
@@ -72,17 +72,17 @@ namespace Weight{
     virtual void on_shutdown();
 
     #if defined(WEIGHT_DESKTOP)
-    virtual void on_key_press(Weight::KeyEvent* e);
-    virtual void on_mouse_press(Weight::MousePressEvent* e);
-    virtual void on_mouse_scroll(Weight::MouseScrollEvent* e);
-    virtual void on_gamepad_event(Weight::Gamepad* g);
+    virtual void on_key_press(WeightEngine::KeyEvent* e);
+    virtual void on_mouse_press(WeightEngine::MousePressEvent* e);
+    virtual void on_mouse_scroll(WeightEngine::MouseScrollEvent* e);
+    virtual void on_gamepad_event(WeightEngine::Gamepad* g);
     #elif defined(WEIGHT_MOBILE)
-    virtual void on_touch(Weight::TouchEvent* e);
+    virtual void on_touch(WeightEngine::TouchEvent* e);
     #endif
 
   };
 
-  extern Weight::Application* create_application();
+  extern WeightEngine::Application* create_application();
 }
 #endif
 

@@ -1,7 +1,7 @@
 #include <WeightEngine/utils/log.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 
 std::shared_ptr<spdlog::logger> Log::engine_logger;
 std::shared_ptr<spdlog::logger> Log::app_logger;

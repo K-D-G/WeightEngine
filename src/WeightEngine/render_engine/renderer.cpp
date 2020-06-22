@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/renderer.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 using namespace GUI;
 
@@ -30,7 +30,7 @@ Renderer::Renderer(int* width, int* height, Colour background_colour, Orthograph
   gui_renderer=new GUIRenderer(MAX_WIDGETS, Renderer_2D, text_renderer);
   AudioUtils::set_subtitling_renderer(text_renderer);
 
-  #ifdef WEIGHT_MAC
+  #if defined(WEIGHT_MAC)
   //For some reason OpenGL crashes on Apple without setting up a VAO at the start
   unsigned int vao;
   glGenVertexArrays(1, &vao);

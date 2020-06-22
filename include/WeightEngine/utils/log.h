@@ -6,7 +6,7 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
-namespace Weight{
+namespace WeightEngine{
   class WEIGHT_API Log{
   private:
     static std::shared_ptr<spdlog::logger> engine_logger;
@@ -214,17 +214,17 @@ namespace Weight{
 }
 
 #ifdef WEIGHT_DEBUG
-#define WEIGHT_LOG(...) Weight::Log::get_engine_logger()->trace(__VA_ARGS__)
-#define WEIGHT_SUCCESS(...) Weight::Log::get_engine_logger()->info(__VA_ARGS__)
-#define WEIGHT_WARNING(...) Weight::Log::get_engine_logger()->warn(__VA_ARGS__)
-#define WEIGHT_ERROR(...) Weight::Log::get_engine_logger()->error(__VA_ARGS__)
+#define WEIGHT_LOG(...) WeightEngine::Log::get_engine_logger()->trace(__VA_ARGS__)
+#define WEIGHT_SUCCESS(...) WeightEngine::Log::get_engine_logger()->info(__VA_ARGS__)
+#define WEIGHT_WARNING(...) WeightEngine::Log::get_engine_logger()->warn(__VA_ARGS__)
+#define WEIGHT_ERROR(...) WeightEngine::Log::get_engine_logger()->error(__VA_ARGS__)
 
-#define LOG(...) Weight::Log::get_app_logger()->trace(__VA_ARGS__)
-#define SUCCESS(...) Weight::Log::get_app_logger()->info(__VA_ARGS__)
-#define WARNING(...) Weight::Log::get_app_logger()->warn(__VA_ARGS__)
-#define ERROR(...) Weight::Log::get_app_logger()->error(__VA_ARGS__)
+#define LOG(...) WeightEngine::Log::get_app_logger()->trace(__VA_ARGS__)
+#define SUCCESS(...) WeightEngine::Log::get_app_logger()->info(__VA_ARGS__)
+#define WARNING(...) WeightEngine::Log::get_app_logger()->warn(__VA_ARGS__)
+#define ERROR(...) WeightEngine::Log::get_app_logger()->error(__VA_ARGS__)
 
-#define DECODE_FREETYPE_ERROR(...) Weight::Log::decode_freetype_error(__VA_ARGS__)
+#define DECODE_FREETYPE_ERROR(...) WeightEngine::Log::decode_freetype_error(__VA_ARGS__)
 
 #else
 

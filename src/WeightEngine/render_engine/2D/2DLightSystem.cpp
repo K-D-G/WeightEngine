@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/2D/2DLightSystem.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 LightSystem2D::LightSystem2D(unsigned int _max_lights):max_lights(_max_lights), max_vertex(_max_lights*4), max_index(_max_lights*6){

@@ -15,7 +15,7 @@ using json=nlohmann::json;
 #include <algorithm>
 
 //Help from the cherno
-namespace Weight{
+namespace WeightEngine{
   struct WEIGHT_API Profile{
     char* name;
     float time;
@@ -52,7 +52,7 @@ namespace Weight{
   };
 }
 
-#define WEIGHT_PROFILE(name) Weight::Profiler p(name)
+#define WEIGHT_PROFILE(name) WeightEngine::Profiler p(name)
 #else
 #define WEIGHT_PROFILE(name) //
 #endif

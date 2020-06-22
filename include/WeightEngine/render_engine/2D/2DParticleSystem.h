@@ -22,12 +22,12 @@
 #include <glm/gtx/compatibility.hpp>
 
 //Based off of the cherno's tutorial
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     struct WEIGHT_API Particle2D{
-      Weight::Position3D position;
-      Weight::Vector2D velocity, velocity_variation;
-      Weight::Colour begin_colour, end_colour;
+      WeightEngine::Position3D position;
+      WeightEngine::Vector2D velocity, velocity_variation;
+      WeightEngine::Colour begin_colour, end_colour;
 
       float begin_size, end_size, size_variation;
 
@@ -40,8 +40,8 @@ namespace Weight{
     };
 
     struct WEIGHT_API ParticleVertexRenderBuffer{
-      Weight::Position3D position;
-      Weight::Colour colour;
+      WeightEngine::Position3D position;
+      WeightEngine::Colour colour;
     };
 
     class WEIGHT_API ParticleSystem2D{
@@ -59,8 +59,8 @@ namespace Weight{
       ParticleSystem2D(unsigned int _max_particles);
       ~ParticleSystem2D();
 
-      Particle2D* create_particle(Weight::Position2D position, Weight::Vector2D velocity, Weight::Vector2D velocity_variation, Weight::Colour begin_colour, Weight::Colour end_colour, float begin_size, float end_size, float size_variation, float life_time=1.0f);
-      Particle2D* create_particle(Weight::Position3D position, Weight::Vector2D velocity, Weight::Vector2D velocity_variation, Weight::Colour begin_colour, Weight::Colour end_colour, float begin_size, float end_size, float size_variation, float life_time=1.0f);
+      Particle2D* create_particle(WeightEngine::Position2D position, WeightEngine::Vector2D velocity, WeightEngine::Vector2D velocity_variation, WeightEngine::Colour begin_colour, WeightEngine::Colour end_colour, float begin_size, float end_size, float size_variation, float life_time=1.0f);
+      Particle2D* create_particle(WeightEngine::Position3D position, WeightEngine::Vector2D velocity, WeightEngine::Vector2D velocity_variation, WeightEngine::Colour begin_colour, WeightEngine::Colour end_colour, float begin_size, float end_size, float size_variation, float life_time=1.0f);
 
       void render(glm::mat4 mvp, float ts);
       void emit(Particle2D* p);

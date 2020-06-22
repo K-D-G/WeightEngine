@@ -1,6 +1,6 @@
 #include <WeightEngine/audio/dialogue.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace Audio;
 using json=nlohmann::json;
 

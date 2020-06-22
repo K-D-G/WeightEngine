@@ -17,7 +17,7 @@
 
 #include <glad/glad.h>
 
-namespace Weight{
+namespace WeightEngine{
   struct WEIGHT_API Vector2D{
     float x, y;
   };
@@ -152,10 +152,10 @@ namespace Weight{
     static void write_file(std::string path, std::string data);
     static float timestamp_to_number(std::string timestamp);
 
-    static float distance(Weight::Position2D v1, Weight::Position2D v2);
-    static float distance(Weight::Position3D v1, Weight::Position3D v2);
-    static float distance(Weight::Position3D v1, Weight::Position2D v2);
-    static float distance(Weight::Position2D v1, Weight::Position3D v2);
+    static float distance(WeightEngine::Position2D v1, WeightEngine::Position2D v2);
+    static float distance(WeightEngine::Position3D v1, WeightEngine::Position3D v2);
+    static float distance(WeightEngine::Position3D v1, WeightEngine::Position2D v2);
+    static float distance(WeightEngine::Position2D v1, WeightEngine::Position3D v2);
 
     #if defined(WEIGHT_DEBUG) && !defined(__APPLE__)
     static void GLAPIENTRY opengl_error_message_callback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* user_param);

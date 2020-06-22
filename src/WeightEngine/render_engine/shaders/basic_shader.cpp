@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/shaders/basic_shader.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 BasicShader* BasicShader::instance=0;

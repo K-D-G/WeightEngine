@@ -1,6 +1,6 @@
 #include <WeightEngine/render_engine/2D/2DAnimation.h>
 
-using namespace Weight;
+using namespace WeightEngine;
 using namespace RenderEngine;
 
 Animation2D::Animation2D(std::string texture_path, std::string details_path){

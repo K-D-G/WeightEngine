@@ -7,7 +7,7 @@
 
 //Edit the max things in core.h to account for different platforms
 
-namespace Weight{
+namespace WeightEngine{
   namespace RenderEngine{
     struct FramebufferData{
       unsigned int width, height;
