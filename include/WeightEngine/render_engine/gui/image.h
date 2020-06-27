@@ -20,7 +20,7 @@ namespace WeightEngine{
         float height;
         WeightEngine::Position2D pos;
 
-        WeightEngine::RenderEngine::QuadData* instance;
+        WeightEngine::RenderEngine::Quad* instance;
       public:
         Image(std::string _path, WeightEngine::Position2D _pos, float _width, float _height);
         ~Image();

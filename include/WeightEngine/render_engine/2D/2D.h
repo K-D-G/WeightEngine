@@ -30,7 +30,7 @@ namespace WeightEngine{
     #define X_AXIS 1
     #define Y_AXIS 2
 
-    struct WEIGHT_API QuadData{
+    struct WEIGHT_API Quad{
       int id;
       unsigned int texture_id;
       WeightEngine::Vector2D dimensions;
@@ -63,9 +63,9 @@ namespace WeightEngine{
       int max_quad;
       int max_vertex;
       int max_index;
-      QuadData* background;
+      Quad* background;
       bool do_render_background;
-      std::vector<QuadData*> geometry;
+      std::vector<Quad*> geometry;
 
       int id_number; //To store the id we are up to for the quads doesn't need to be a secure variable
       int blank_texture_id; //For colour quads
@@ -73,14 +73,14 @@ namespace WeightEngine{
       Renderer2D(int _max_quad);
       ~Renderer2D();
 
-      QuadData* create_quad(WeightEngine::Position2D position, float width, float height, WeightEngine::Colour colour, bool affect_mvp=true);
-      QuadData* create_quad(WeightEngine::Position2D position, float width, float height, std::string texture_path, bool affect_mvp=true);
+      Quad* create_quad(WeightEngine::Position2D position, float width, float height, WeightEngine::Colour colour, bool affect_mvp=true);
+      Quad* create_quad(WeightEngine::Position2D position, float width, float height, std::string texture_path, bool affect_mvp=true);
 
-      QuadData* create_quad(WeightEngine::Position3D position, float width, float height, WeightEngine::Colour colour, bool affect_mvp=true);
-      QuadData* create_quad(WeightEngine::Position3D position, float width, float height, std::string texture_path, bool affect_mvp=true);
+      Quad* create_quad(WeightEngine::Position3D position, float width, float height, WeightEngine::Colour colour, bool affect_mvp=true);
+      Quad* create_quad(WeightEngine::Position3D position, float width, float height, std::string texture_path, bool affect_mvp=true);
 
-      void submit(QuadData* q);
-      void remove(QuadData* q);
+      void submit(Quad* q);
+      void remove(Quad* q);
       void render(glm::mat4 mvp, float ts);
 
       void set_background_image(std::string background_path);

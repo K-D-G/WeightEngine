@@ -2,6 +2,7 @@
 
 using namespace WeightEngine;
 using namespace RenderEngine;
+using namespace Physics;
 
 #ifdef WEIGHT_ANDROID
 using namespace Android;
@@ -40,7 +41,7 @@ void Application::run(WeightState* _weight_engine){
 
   event_system=new EventSystem(e);
 
-  physics_engine=new PhysicsEngine(pws);
+  physics_engine=new PhysicsEngine(&pws);
 
   camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
 
@@ -102,7 +103,7 @@ void Application::run(){
   event_system=new EventSystem(e);
   #endif
 
-  physics_engine=new PhysicsEngine(pws);
+  physics_engine=new PhysicsEngine(&pws);
 
   camera=new OrthographicCameraController((float)(*(_width))/(float)(*(_height)), event_system, _width, _height);
 

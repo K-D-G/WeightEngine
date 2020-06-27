@@ -3,34 +3,34 @@
 using namespace WeightEngine;
 using namespace RenderEngine;
 
-void QuadData::move(Position3D translation){
+void Quad::move(Position3D translation){
   for(int i=0; i<4; i++){
     this->vertices[i].position.x+=translation.x;
     this->vertices[i].position.y+=translation.y;
     this->vertices[i].position.z+=translation.z;
   }
 }
-void QuadData::move(Position2D translation){
+void Quad::move(Position2D translation){
   Position3D arg={translation.x, translation.y, 0};
   move(arg);
 }
 
-void QuadData::set_position(Position3D position){
+void Quad::set_position(Position3D position){
   this->vertices[0].position={position.x, position.y, position.z};
   this->vertices[1].position={position.x+dimensions.x, position.y, position.z};
   this->vertices[2].position={position.x+dimensions.x, position.y+dimensions.y, position.z};
   this->vertices[3].position={position.x, position.y+dimensions.y, position.z};
 }
-void QuadData::set_position(Position2D position){
+void Quad::set_position(Position2D position){
   Position3D arg={position.x, position.y, 0.0f};
   set_position(arg);
 }
-void QuadData::set_size(float width, float height){
+void Quad::set_size(float width, float height){
   dimensions={width, height};
   set_position(this->vertices[0].position);
 }
 
-void QuadData::rotate(float degrees){
+void Quad::rotate(float degrees){
   float radians=glm::radians(degrees);
 
   float dimensions[2]={this->vertices[2].position.x-this->vertices[0].position.x, this->vertices[2].position.y-this->vertices[0].position.y};
@@ -47,7 +47,7 @@ void QuadData::rotate(float degrees){
     this->vertices[i].position.y+=centre[1];
   }
 }
-void QuadData::flip(int axis){
+void Quad::flip(int axis){
   if(axis==X_AXIS){
     //Swap the x0 y0 and x1 y1 (and the other 2)
     Vertex buffer=this->vertices[0];
@@ -68,7 +68,7 @@ void QuadData::flip(int axis){
     this->vertices[2]=buffer;
   }
 }
-void QuadData::scale(float factor){
+void Quad::scale(float factor){
   float current_width=this->vertices[1].position.x-this->vertices[0].position.x;
   float current_height=this->vertices[2].position.y-this->vertices[0].position.y;
   this->vertices[1].position.x=this->vertices[0].position.x+(current_width*factor);
@@ -77,11 +77,11 @@ void QuadData::scale(float factor){
   this->vertices[3].position.y=this->vertices[0].position.y+(current_height*factor);
 }
 
-void QuadData::set_texture(std::string path){
+void Quad::set_texture(std::string path){
   this->texture_id=Utils::load_opengl_texture(Utils::load_image(path));
 }
 
-void QuadData::set_texture_from_atlas(SubTexture* texture){
+void Quad::set_texture_from_atlas(SubTexture* texture){
   texture_id=texture->texture_id;
   for(int i=0; i<8; i+=2){
     vertices[i/2].texture_coords.x=texture->texture_coords[i];
@@ -89,7 +89,7 @@ void QuadData::set_texture_from_atlas(SubTexture* texture){
   }
 }
 
-void QuadData::fill(Colour colour){
+void Quad::fill(Colour colour){
   for(int i=0; i<4; i++){
     this->vertices[i].colour=colour;
   }
@@ -151,15 +151,15 @@ Renderer2D::~Renderer2D(){
   glDeleteBuffers(1, &index_buffer);
 }
 
-QuadData* Renderer2D::create_quad(Position2D position, float width, float height, Colour colour, bool affect_mvp){
+Quad* Renderer2D::create_quad(Position2D position, float width, float height, Colour colour, bool affect_mvp){
   return create_quad({position.x, position.y, 0.0f}, width, height, colour);
 }
-QuadData* Renderer2D::create_quad(Position2D position, float width, float height, std::string texture_path, bool affect_mvp){
+Quad* Renderer2D::create_quad(Position2D position, float width, float height, std::string texture_path, bool affect_mvp){
   return create_quad({position.x, position.y, 0.0f}, width, height, texture_path);
 }
 
-QuadData* Renderer2D::create_quad(Position3D position, float width, float height, Colour colour, bool affect_mvp){
-  QuadData* result=new QuadData;
+Quad* Renderer2D::create_quad(Position3D position, float width, float height, Colour colour, bool affect_mvp){
+  Quad* result=new Quad;
   result->id=id_number++;
   result->texture_id=blank_texture_id;
 
@@ -193,8 +193,8 @@ QuadData* Renderer2D::create_quad(Position3D position, float width, float height
   return result;
 }
 
-QuadData* Renderer2D::create_quad(Position3D position, float width, float height, std::string texture_path, bool affect_mvp){
-  QuadData* result=new QuadData;
+Quad* Renderer2D::create_quad(Position3D position, float width, float height, std::string texture_path, bool affect_mvp){
+  Quad* result=new Quad;
   result->id=id_number++;
   result->texture_id=Utils::load_opengl_texture(Utils::load_image(texture_path));
 
@@ -228,7 +228,7 @@ QuadData* Renderer2D::create_quad(Position3D position, float width, float height
   return result;
 }
 
-void Renderer2D::submit(QuadData* q){
+void Renderer2D::submit(Quad* q){
   if(geometry.size()>=max_quad){
     WEIGHT_WARNING("2D: Max number of quads met. Cannot render quad id: {0}", q->id);
     return;
@@ -237,7 +237,7 @@ void Renderer2D::submit(QuadData* q){
   }
 }
 
-void Renderer2D::remove(QuadData* q){
+void Renderer2D::remove(Quad* q){
   geometry.erase(std::find(geometry.begin(), geometry.end(), q));
 }
 

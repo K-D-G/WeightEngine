@@ -9,6 +9,7 @@
 namespace WeightEngine{
   namespace Physics{
     struct Ground{
+      bool initialised;
       b2BodyDef body_def;
       b2PolygonShape box;
     };

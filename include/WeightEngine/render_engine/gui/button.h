@@ -16,7 +16,7 @@ namespace WeightEngine{
       class WEIGHT_API Button:public Widget{
       public:
         WeightEngine::RenderEngine::GUI::Label* label_instance;
-        WeightEngine::RenderEngine::QuadData* quad_instance;
+        WeightEngine::RenderEngine::Quad* quad_instance;
         WeightEngine::Position2D pos;
         float width, height;
         WeightEngine::Colour default_colour;
