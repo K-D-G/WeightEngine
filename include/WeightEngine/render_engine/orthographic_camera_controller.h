@@ -31,6 +31,7 @@ namespace WeightEngine{
       void on_mouse_scroll(WeightEngine::MouseScrollEvent* mse);
       void on_window_resize(int width, int height);
 
+      float* get_zoom_level();
       OrthographicCamera* get_camera();
     };
   }

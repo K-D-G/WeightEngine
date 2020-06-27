@@ -14,3 +14,5 @@ WeightEngineTest/*
 
 libWeightEngine.a
 libWeightEngine.dylib
+
+keyword_search.py

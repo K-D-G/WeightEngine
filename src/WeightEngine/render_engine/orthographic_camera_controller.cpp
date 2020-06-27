@@ -49,6 +49,10 @@ void OrthographicCameraController::on_window_resize(int width, int height){
   camera->set_projection(-aspect_ratio**(zoom_level), aspect_ratio**(zoom_level), -*(zoom_level), *(zoom_level));
 }
 
+float* OrthographicCameraController::get_zoom_level(){
+  return zoom_level;
+}
+
 OrthographicCamera* OrthographicCameraController::get_camera(){
   return camera;
 }

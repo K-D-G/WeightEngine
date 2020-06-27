@@ -17,6 +17,9 @@
 #include <WeightEngine/audio/dialogue.h>
 #include <WeightEngine/audio/music_manager.h>
 
+#include <WeightEngine/physics/physics_engine.h>
+#include <WeightEngine/physics/physics_object.h>
+
 #include <WeightEngine/render_engine/shaders/basic_shader.h>
 #include <WeightEngine/render_engine/shaders/Light2D_shader.h>
 #include <WeightEngine/render_engine/shaders/Particle2D_shader.h>

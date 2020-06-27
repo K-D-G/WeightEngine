@@ -10,6 +10,7 @@
 #include <WeightEngine/utils/time.h>
 #include <WeightEngine/utils/audio_utils.h>
 #include <WeightEngine/utils/profiling.h>
+#include <WeightEngine/physics/physics_engine.h>
 #include <WeightEngine/event_system.h>
 #include <WeightEngine/window.h>
 #include <WeightEngine/render_engine/renderer.h>
@@ -42,6 +43,7 @@ namespace WeightEngine{
     WeightEngine::Colour background_colour;
     std::string background_path;
     std::string icon_path;
+    WeightEngine::Physics::PhysicsWorldSetup pws;
 
     #ifdef WEIGHT_ANDROID
     WeightEngine::Android::WeightState* weight_engine;
@@ -50,10 +52,11 @@ namespace WeightEngine{
     WeightEngine::Window* window;
     WeightEngine::EventSystem* event_system;
     WeightEngine::RenderEngine::Renderer* renderer;
+    WeightEngine::Physics::PhysicsEngine* physics_engine;
     WeightEngine::RenderEngine::OrthographicCameraController* camera;
     WeightEngine::Time* time;
 
-    Application(std::string app_name, int width, int height, WeightEngine::Colour _background_colour={}, std::string _background_path="", std::string _icon_path="");
+    Application(std::string app_name, int width, int height, WeightEngine::Physics::PhysicsWorldSetup _pws, WeightEngine::Colour _background_colour={}, std::string _background_path="", std::string _icon_path="");
     ~Application();
 
     #ifdef WEIGHT_ANDROID

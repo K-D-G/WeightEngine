@@ -7,7 +7,7 @@ using namespace RenderEngine;
 using namespace Android;
 #endif
 
-Application::Application(std::string app_name, int width, int height, Colour _background_colour, std::string _background_path, std::string _icon_path){
+Application::Application(std::string app_name, int width, int height, WeightEngine::Physics::PhysicsWorldSetup _pws, Colour _background_colour, std::string _background_path, std::string _icon_path){
   _app_name=app_name;
   Log::init(app_name);
 
@@ -19,6 +19,7 @@ Application::Application(std::string app_name, int width, int height, Colour _ba
   background_colour=_background_colour;
   background_path=_background_path;
   icon_path=_icon_path;
+  pws=_pws;
 }
 
 #ifdef WEIGHT_ANDROID
@@ -39,6 +40,8 @@ void Application::run(WeightState* _weight_engine){
 
   event_system=new EventSystem(e);
 
+  physics_engine=new PhysicsEngine(pws);
+
   camera=new OrthographicCameraController((float)*(_width)/(float)*(_height), event_system, _width, _height);
 
   window=new Window(_app_name, _width, _height, icon_path, camera, event_system, weight_engine);
@@ -54,6 +57,7 @@ void Application::run(WeightState* _weight_engine){
     time->update();
     camera->on_update(time->get_time_step());
     this->on_update(time->get_time_step());
+    physics_engine->update(time->get_time_step(), camera->get_zoom_level());
     renderer->render(time->get_time_step());
     window->update();
     event_system->update();
@@ -98,6 +102,8 @@ void Application::run(){
   event_system=new EventSystem(e);
   #endif
 
+  physics_engine=new PhysicsEngine(pws);
+
   camera=new OrthographicCameraController((float)(*(_width))/(float)(*(_height)), event_system, _width, _height);
 
   window=new Window(_app_name, _width, _height, icon_path, camera, event_system);
@@ -119,6 +125,7 @@ void Application::run(){
     time->update();
     camera->on_update(time->get_time_step());
     this->on_update(time->get_time_step());
+    physics_engine->update(time->get_time_step(), camera->get_zoom_level());
     renderer->render(time->get_time_step());
     window->update();
     event_system->update();
