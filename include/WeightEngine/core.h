@@ -43,6 +43,9 @@
 #endif
 #define MAX_TEXTURES GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS
 
+#define X_AXIS 1
+#define Y_AXIS 2
+
 #if defined(WEIGHT_DESKTOP)
 #define MAX_PARTICLES 10000
 #define MAX_QUADS 100000

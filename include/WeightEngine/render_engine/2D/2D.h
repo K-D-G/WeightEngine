@@ -8,6 +8,7 @@
 #include <WeightEngine/render_engine/shaders/basic_shader.h>
 #include <WeightEngine/render_engine/texture_atlas.h>
 #include <WeightEngine/render_engine/vertex.h>
+#include <WeightEngine/render_engine/2D/quad.h>
 
 #include <vector>
 #include <algorithm>
@@ -27,33 +28,6 @@
 
 namespace WeightEngine{
   namespace RenderEngine{
-    #define X_AXIS 1
-    #define Y_AXIS 2
-
-    struct WEIGHT_API Quad{
-      int id;
-      unsigned int texture_id;
-      WeightEngine::Vector2D dimensions;
-      WeightEngine::RenderEngine::Vertex vertices[4];
-      //WeightEngine::Position3D centre_pos;
-
-      void move(WeightEngine::Position3D translation);
-      void move(WeightEngine::Position2D translation);
-      void set_position(WeightEngine::Position3D position);
-      void set_position(WeightEngine::Position2D position);
-      void set_size(float width, float height);
-
-      void rotate(float degrees);
-      void flip(int axis);
-      void scale(float factor);
-
-      void set_texture(std::string path);
-      void set_texture_from_atlas(WeightEngine::RenderEngine::SubTexture* texture);
-
-      void fill(WeightEngine::Colour colour);
-      inline void no_fill(){fill({0.0f, 0.0f, 0.0f, 0.0f});}
-    };
-
     class WEIGHT_API Renderer2D{
     private:
       unsigned int vertex_array;

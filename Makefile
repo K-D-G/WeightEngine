@@ -24,6 +24,7 @@ objects=obj/WeightEngine/utils/log.o \
 				obj/WeightEngine/render_engine/shaders/text_shader.o \
 				obj/WeightEngine/render_engine/orthographic_camera.o \
 				obj/WeightEngine/render_engine/orthographic_camera_controller.o \
+				obj/WeightEngine/render_engine/2D/quad.o \
 				obj/WeightEngine/render_engine/2D/2D.o \
 				obj/WeightEngine/render_engine/2D/2DAnimation.o \
 				obj/WeightEngine/render_engine/2D/2DParticleSystem.o \
