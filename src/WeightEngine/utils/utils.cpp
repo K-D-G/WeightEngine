@@ -115,7 +115,7 @@ unsigned int Utils::load_blank_opengl_texture(){
   unsigned int result;
   unsigned char* pixels=new unsigned char[256*256*4];
   for(int i=0; i<256*256*4; i++){
-    pixels[i]=0;
+    pixels[i]=255;
   }
   glGenTextures(1, &result);
   glBindTexture(GL_TEXTURE_2D, result);
